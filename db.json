@@ -1,0 +1,8 @@
+{
+    "user": [
+      { "id": 1, "email": "mirza@123.com", "password": "123" },
+      { "id": 2, "email": "osama@gmail.com", "password": "123" }
+    ],
+  
+    "profile": { "name": "typicode" }
+  }
