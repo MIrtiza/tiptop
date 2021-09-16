@@ -59,7 +59,7 @@ export const Login = () => {
                     </div>
                     <a 
                     href="/panel"
-                    className="bg-blue-700 border text-white py-2 mt-5 border-blue-200 hover:text-white hover:bg-purple-600 hover:border-transparent 
+                    className="bg-blue-700 border text-center text-white py-2 mt-5 border-blue-200 hover:text-white hover:bg-purple-600 hover:border-transparent 
                                         focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2" 
                     type="button">
                             Sign In

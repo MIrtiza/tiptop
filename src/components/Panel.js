@@ -1,25 +1,25 @@
 
 import logo from '../assets/images/logo.png'
+
+import ManageUser from './ManageUser'
+import AddNewUser from './AddNewUser'
+
 const Panel = () => {
+
     return (
         <>
              <div className="font-sans text-gray-900 antialiased">
-               <div className="min-h-screen flex bg-gray-200">
+               <div className="min-h-screen flex bg-white">
+
+{/* ======================= left side of panel start ============================ */}
                     <div className="flex-shrink-0 w-64 bg-gray-900">
-                        <a href="/panel">
-                        <div
-                            className="flex items-center h-16 px-4 bg-gray-900 text-xl text-white font-medium"
-                        >
-                        
-                            <div className="logo-wrap w-full text-center">
-                                <img src={logo} alt="logo" className="m-auto" />
+                        <a href="/panel" className="block">
+                            <div className="flex items-center h-16 px-4 bg-gray-900 text-xl text-white font-medium">
+                                <div className="logo-wrap w-full text-center">
+                                    <img src={logo} alt="logo" className="m-auto" />
+                                </div>
                             </div>
-                        </div>
                         </a>
-                    <div>
-                    
-                    
-                        
                         <div className="px-6 py-6 border-t border-gray-700">
                             <h4
                             className="text-sm text-gray-600 uppercase font-bold"
@@ -49,18 +49,22 @@ const Panel = () => {
                             </li>
                             </ul>
                         </div>
-                        </div>
                     </div>
+
+{/* ======================= right side of panel start ============================ */}
+
                     <div className="flex-grow flex flex-col">
-                            <div
-                            className="relative shadow-md bg-white flex-shrink-0">
-                            <div className="flex justify-between items-center h-16 px-12">
-                              
-                                <div className="relative w-64">
-                                    <div className="relative z-50">
+                        
+                            {/* Top bar start */}
+                        <div className="relative shadow-md bg-white flex-shrink-0 flex justify-between items-center h-16 px-8">   
+                                <div className="relative w-full h-full">
+                                    <div className="relative z-50 h-full">
                                     <input
                                         type="text"
-                                        className="block w-full py-2 pl-12 pr-4 bg-gray-200 rounded-full border border-transparent focus:bg-white focus:border-gray-300 focus:outline-none"
+                                        placeholder="Search"
+                                        className="block w-full  h-full
+                                        py-2 pl-12 pr-4 bg-white 
+                                         border-transparent focus:bg-gray-100 focus:border-gray-300 focus:outline-none"
                                     />
                                     <div className="flex items-center absolute left-0 inset-y-0 pl-3">
                                         <svg
@@ -76,27 +80,28 @@ const Panel = () => {
                                     </div>
                                 
                                 </div>
-                            <div className="flex items-center">
-                        
-                            <div className="ml-6">
-                            
-                                <div className="relative">
-                                <button type="button" className="block w-full focus:outline-none">
-                                    <span className="flex items-center"
-                                    ><img
+                                <div className="profile-icon relative ml-6">
+                                <button type="button" className="block w-full border-blue-600 border-2 rounded-full p-1/2 focus:outline-none">
+                                  <img
                                         src="https://www.gravatar.com/avatar/9240e2357dc0b9a4cfd1b109c23af063?d=https%3A%2F%2Fui-avatars.com%2Fapi%2Fmuse"
                                         className="h-8 w-8 rounded-full"/>
-                                
-                                    </span>
-                                </button>
-                                
+                                </button> 
                                 </div>
-                            </div>
-                            </div>
                         </div>
-                </div>
-        
-                </div>
+                        {/* Top bar end */}
+
+                        {/* Inner section start */}
+
+                        <div className="inner-section py-9 px-8">
+                            
+                            {/* <ManageUser /> */}
+
+                            <AddNewUser />
+                       
+                        </div>
+                        {/* Inner section end */}
+                       
+                    </div>
                 </div>
              </div>   
         </>
