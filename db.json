@@ -1,12 +1,40 @@
 {
     "user": [
-      { "id": 1, "email": "mirza@123.com", "password": "123", "name":"Nor ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 12:12:00" },
-      { "id": 2, "email": "osama@gmail.com", "password": "123", "name":"Chandler ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00" },
-      { "id": 3, "email": "osama@gmail.com", "password": "123","name":"Monica ani A jail", "status": true,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00" },
-      { "id": 4, "email": "mirza@123.com", "password": "123", "name":"Joey ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 12:12:00" },
-      { "id": 5, "email": "osama@gmail.com", "password": "123", "name":"Smell ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00" },
-      { "id": 6, "email": "osama@gmail.com", "password": "123","name":"Racheal ani A jail", "status": true,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00" }
+      { "id": 1, "email": "mirza@123.com", "password": "123", "name":"Nor ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 12:12:00","permission": "Administrator Access", "permissionType":"AWS"  },
+      { "id": 2, "email": "osama@gmail.com", "password": "123", "name":"Chandler ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00","permission": "Administrator Access","permissionType":"AWS" },
+      { "id": 3, "email": "osama@gmail.com", "password": "123","name":"Monica ani A jail", "status": true,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00","permission": "Administrator Access","permissionType":"AWS" },
+      { "id": 4, "email": "mirza@123.com", "password": "123", "name":"Joey ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 12:12:00" ,"permission": "Administrator Access","permissionType":"AWS"},
+      { "id": 5, "email": "osama@gmail.com", "password": "123", "name":"Smell ani A jail","status": false,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00" ,"permission": "Administrator Access","permissionType":"AWS"},
+      { "id": 6, "email": "osama@gmail.com", "password": "123","name":"Racheal ani A jail", "status": true,"role":"TM", "organization": "PCD", "created":"2021-12-24 23:12:00","permission": "Administrator Access","permissionType":"AWS" }
     ],
-  
-    "profile": { "name": "typicode" }
+
+    "policy":[
+      {
+        "id": 1, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 2, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 3, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 4, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 5, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 6, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 7, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 8, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      },
+      {
+        "id": 9, "policyname": "Adminitrator Access Amplify", "type": "AWS Managed"
+      }
+    ]
   }

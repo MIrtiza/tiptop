@@ -1,64 +1,38 @@
 
-import logo from '../assets/images/logo.png'
 
+import React, { useState } from 'react'
 import ManageUser from './ManageUser'
 import AddNewUser from './AddNewUser'
-
+import Sidebar from './Sidebar'
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { IconContext } from 'react-icons';
+import { Link } from 'react-router-dom';
 const Panel = () => {
+    const [sidebar, setSidebar] = useState(false);
 
+    const showSidebar = () => setSidebar(!sidebar);
     return (
         <>
              <div className="font-sans text-gray-900 antialiased">
                <div className="min-h-screen flex bg-white">
 
 {/* ======================= left side of panel start ============================ */}
-                    <div className="flex-shrink-0 w-64 bg-gray-900">
-                        <a href="/panel" className="block">
-                            <div className="flex items-center h-16 px-4 bg-gray-900 text-xl text-white font-medium">
-                                <div className="logo-wrap w-full text-center">
-                                    <img src={logo} alt="logo" className="m-auto" />
-                                </div>
-                            </div>
-                        </a>
-                        <div className="px-6 py-6 border-t border-gray-700">
-                            <h4
-                            className="text-sm text-gray-600 uppercase font-bold"
-                            >
-                            Manage User
-                            </h4>
-                            <ul className="mt-3 text-white">
-                            <li className="mt-3">
-                                <a href="#" className="">
-                                Maange rule
-                                </a>
-                            </li>
-                            <li className="mt-3">
-                                <a href="#" className="">
-                                Manage Organization
-                                </a>
-                            </li>
-                            <li className="mt-3">
-                                <a href="#" className="">
-                                Manage Module
-                                </a>
-                            </li>
-                            <li className="mt-3">
-                                <a href="#" className="">
-                                Placeholder
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    <Sidebar sidebar={sidebar} />
+                   
 {/* ======================= right side of panel start ============================ */}
 
                     <div className="flex-grow flex flex-col">
                         
                             {/* Top bar start */}
                         <div className="relative shadow-md bg-white flex-shrink-0 flex justify-between items-center h-16 px-8">   
+                        <       Link to='#' className='menu-bars pr-4'>
+                                    <FaIcons.FaBars onClick={showSidebar}  className="text-3xl" />
+                                </Link>
                                 <div className="relative w-full h-full">
-                                    <div className="relative z-50 h-full">
+                               
+                              
+                                    <div className="relative h-full">
                                     <input
                                         type="text"
                                         placeholder="Search"
@@ -93,7 +67,7 @@ const Panel = () => {
                         {/* Inner section start */}
 
                         <div className="inner-section py-9 px-8">
-                            
+
                             {/* <ManageUser /> */}
 
                             <AddNewUser />
