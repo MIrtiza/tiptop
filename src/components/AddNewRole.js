@@ -6,7 +6,7 @@ import axios from "axios"
 import Select from 'react-select';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
-const AddNewUser = () => {
+const AddNewRole = () => {
     const selectOrgoptions = [
         { value: 'Org 1', label: 'Org 1' },
         { value: 'Org 2', label: 'Org 2' },
@@ -23,13 +23,9 @@ const AddNewUser = () => {
         { value: 'GHI', label: 'GHI' },
       ];
     const [results,setResult] = useState([]);
-    const [selectOrg, setSelectOrg] = useState(null);
-    const [selectRole, setSelectRole] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
     const [PermissionmodalIsOpen, setPermissionModalIsOpen] = useState(false);
-    const [orgmodalIsOpen, setOrgModalIsOpen] = useState(false);
-    const [rolemodalIsOpen, setRoleModalIsOpen] = useState(false);
- 
+
     useEffect(()=>{
         const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/user/",{
@@ -51,21 +47,6 @@ const AddNewUser = () => {
       
      const handlePerCloseModal= ()=> {
         setPermissionModalIsOpen(false);
-      }
-
-      const handleOrgOpenModal =()=> {
-        setOrgModalIsOpen(true);
-      }
-      
-     const handleOrgCloseModal= ()=> {
-        setOrgModalIsOpen(false);
-      }
-      const handleRoleOpenModal =()=> {
-        setRoleModalIsOpen(true);
-      }
-      
-     const handleRoleCloseModal= ()=> {
-        setRoleModalIsOpen(false);
       }
  
     const TabOne = () => {
@@ -107,6 +88,7 @@ const AddNewUser = () => {
                         <Modal
                         isOpen={PermissionmodalIsOpen}
                         contentLabel=" Modal"
+                        overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
                         >
                             <div className="modal-header flex justify-between items-center bg-gray-200 py-3 px-3">
                             <input type="text" name="search" placeholder="Search Permision" className="border-2 py-3 px-4 w-5/12 inline-block"  />
@@ -190,14 +172,14 @@ const tabs = [
         <>
         <Breadcrumb />
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Add New User</h2>
+            <h2 className="text-blue-600 text-3xl mb-7">Add New Role</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3">
-            <div className="col-span-2 lg:col-span-2 md:col-span-3 pr-0 md:pr-6 lg:pr-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
+            <div className="col-span-2 pr-6">
                 <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Name
+                        Role Name
                     </label>
                     <input 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
@@ -205,83 +187,18 @@ const tabs = [
                     type="text" 
                     />
                 </div>
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:block pr-0 md:pr-0 lg:pr-4">
+                <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Email Address
+                        Discription
                     </label>
                     <input 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="username" 
-                    type="text" 
-                    placeholder="e.g. user@domain.com"
-                    />
-                </div>
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Temporary Password
-                    </label>
-                    <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="username" 
-                    type="password" 
-                    />
-                </div>
-
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:block md:inline-block pr-0 md:pr-0 lg:pr-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Mobile No.
-                    </label>
-                    <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="username" 
+                    id="discription" 
                     type="text" 
                     />
                 </div>
-
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pr-0 md:pr-0 lg:pr-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Organization
-                    </label>
-                    {/* <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="username" 
-                    type="text" 
-                    /> */}
-                     <Select
-                        defaultValue={[selectOrgoptions[1], selectOrgoptions[3]]}
-                       
-                        // defaultValue={selectedOption}
-                        onChange={setSelectOrg}
-                        options={selectOrgoptions}
-                        name="organization"
-                        value={selectOrg}
-                        className=""
-                    />
-                       <div className="add-more mt-3">
-                            <span>or</span> 
-                            <button className="ml-2 text-blue-700" onClick={handleOrgOpenModal}>Add new Organization</button>
-                        </div>
-                </div>
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                    Role
-                    </label>
-                    <Select
-                        defaultValue={[selectRoleoptions[1], selectRoleoptions[3]]}
-                       
-                        // defaultValue={selectedOption}
-                        onChange={setSelectRole}
-                        options={selectRoleoptions}
-                        name="organization"
-                        value={selectRole}
-                        className=""
-                    />
-                   
-                        <div className="add-more mt-3">
-                            <span>or</span> 
-                            <button className="ml-2 text-blue-700" onClick={handleRoleOpenModal}>Add new Role</button>
-                        </div>
-                </div>
+              
+               
             
                 <div className="select-section mb-7">
                 <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
@@ -309,85 +226,14 @@ const tabs = [
                     </button>
                 </div>
 
-                {/* organization modal */}
-                <div className="modal-container">
-                    <Modal
-                        isOpen={orgmodalIsOpen}
-                        contentLabel=" Modal"
-                        className="w-2/6 h-2/6 bg-white m-auto border-2 absolute -inset-1/2 p-5"
-                        overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
-                    >
-                        <h2 className="text-blue-600 text-2xl mb-7">Add New Organization</h2>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Organization NAme
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Registration No. 
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
-                        <div className="button-wrapper flex flex-row ml-auto justify-end">
-                            <button onClick={handleOrgCloseModal} className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleOrgCloseModal} className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md">Add Organization</button>
-                        </div>
-                    </Modal>
-                </div>
-          
-                {/* Role modal */}
-                <div className="modal-container">
-                    <Modal
-                        isOpen={rolemodalIsOpen}
-                        contentLabel=" Modal"
-                        className="w-2/6 h-2/6 bg-white m-auto border-2 absolute -inset-1/2 p-5"
-                       overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
-                    >
-                          <h2 className="text-blue-600 text-2xl mb-7">Add New Role</h2>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Role NAme
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Registration No. 
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
-                        <div className="button-wrapper flex flex-row ml-auto justify-end">
-                            <button onClick={handleRoleCloseModal} className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleRoleCloseModal} className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md">Add Role</button>
-                        </div>
-                    </Modal>
-                </div>
-            </div>
+               </div>
 
             {/* inner right side */}
-            <div className="md:col-span-2 lg:col-span-1 p-7 border-2 border-gray-300 rounded-2xl mb-6">
+            <div className="p-7 border-2 border-gray-300 rounded-2xl" style={{height: "fit-content"}}>
             <h3 className="text-lg font-semibold mb-7">Step by Step guide</h3>
             <ul className="step-list ">
                 <li className="pb-5 mb-3">
-                    <h6>User Role</h6>
+                    <h6>Create new role</h6>
                     <p>
                         Please ensure the required role is available.
                         select a role that user belongs to form the dropdown
@@ -398,7 +244,7 @@ const tabs = [
                     </p>
                 </li>
                 <li className="pb-5 mb-3">
-                    <h6>Organization</h6>
+                    <h6>Attached module to Role</h6>
                     <p>
                         Please ensure the required role is available.
                         select a role that user belongs to form the dropdown
@@ -408,28 +254,7 @@ const tabs = [
                         Click to setup a new role.
                     </p>
                 </li>
-                <li className="pb-5 mb-3">
-                    <h6>Station</h6>
-                    <p>
-                        Please ensure the required role is available.
-                        select a role that user belongs to form the dropdown
-                        list or setup new.if non available. 
-
-                        <br />
-                        Click to setup a new role.
-                    </p>
-                </li>
-                <li className="pb-5 mb-3">
-                    <h6>Good to know</h6>
-                    <p>
-                        Please ensure the required role is available.
-                        select a role that user belongs to form the dropdown
-                        list or setup new.if non available. 
-
-                        <br />
-                        Click to setup a new role.
-                    </p>
-                </li>
+            
             </ul>
         </div>
         </div>
@@ -437,4 +262,4 @@ const tabs = [
     )
 }
 
-export default AddNewUser
+export default AddNewRole

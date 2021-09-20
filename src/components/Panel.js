@@ -1,8 +1,14 @@
 
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
 import ManageUser from './ManageUser'
+import ManageRole from './ManageRole'
+import ManageOrganization from './ManageOrganization'
+import ManageModule from './ManageModule'
 import AddNewUser from './AddNewUser'
+import AddNewRole from './AddNewRole'
+import AddNewModule from './AddNewModule'
 import Sidebar from './Sidebar'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
@@ -12,6 +18,68 @@ const Panel = () => {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
+    const [userResults,setUserResult] = useState([]);
+    const [roleResults,setRoleResult] = useState([]);
+    const [orgResults,setOrgResult] = useState([]);
+    const [moduleResults,setModuleResult] = useState([]);
+
+    useEffect(()=>{
+        const search = async ()=>{
+            const {data} = await axios.get("http://localhost:3000/user/",{
+                params:{
+                    action: "query",
+                    format: "json"
+                }
+            })
+
+            setUserResult(data);
+
+        }
+        search();
+    },[]);
+
+    useEffect(()=>{
+        const search = async ()=>{
+            const {data} = await axios.get("http://localhost:3000/role/",{
+                params:{
+                    action: "query",
+                    format: "json"
+                }
+            })
+
+            setRoleResult(data);
+
+        }
+        search();
+    },[]);
+    useEffect(()=>{
+        const search = async ()=>{
+            const {data} = await axios.get("http://localhost:3000/organization/",{
+                params:{
+                    action: "query",
+                    format: "json"
+                }
+            })
+
+            setOrgResult(data);
+
+        }
+        search();
+    },[]);
+    useEffect(()=>{
+        const search = async ()=>{
+            const {data} = await axios.get("http://localhost:3000/module/",{
+                params:{
+                    action: "query",
+                    format: "json"
+                }
+            })
+
+            setModuleResult(data);
+
+        }
+        search();
+    },[]);
     return (
         <>
              <div className="font-sans text-gray-900 antialiased">
@@ -68,9 +136,14 @@ const Panel = () => {
 
                         <div className="inner-section py-9 px-8">
 
-                            {/* <ManageUser /> */}
+                            {/* <ManageUser data={userResults} /> */}
+                            {/* <ManageRole data={roleResults} /> */}
+                            {/* <ManageOrganization data={orgResults} /> */}
+                            {/* <ManageModule data={moduleResults} /> */}
 
-                            <AddNewUser />
+                            {/* <AddNewUser /> */}
+                            {/* <AddNewRole /> */}
+                            <AddNewModule />
                        
                         </div>
                         {/* Inner section end */}

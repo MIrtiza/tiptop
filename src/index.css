@@ -141,3 +141,147 @@
 .nav-menu.active{
   width: 5rem;
 }
+
+/* table */
+
+.rwd-table {
+  margin: auto;
+  min-width: 300px;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
+/* .rwd-table tr:first-child {
+  border-top: none;
+  background: #428bca;
+  color: #fff;
+}
+
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f9fc;
+} */
+
+.rwd-table tr:nth-child(odd):not(:first-child) {
+  /* background-color: #ebf3f9; */
+}
+
+.rwd-table th {
+  display: none;
+}
+
+.rwd-table td {
+  display: block;
+}
+
+.rwd-table td:first-child {
+  margin-top: .5em;
+}
+
+.rwd-table td:last-child {
+  margin-bottom: .5em;
+}
+
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #000;
+}
+
+.rwd-table th,
+.rwd-table td {
+  text-align: left;
+}
+
+.rwd-table {
+  color: #333;
+  /* border-radius: .4em; */
+  overflow: hidden;
+}
+
+.rwd-table tr {
+  border-color: #bfbfbf;
+  border-bottom-width: 1px;
+}
+
+.rwd-table th,
+.rwd-table td {
+  padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+  .rwd-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+
+  .rwd-table tr:hover:not(:first-child) {
+    background-color: #d8e7f3;
+  }
+  .rwd-table td:before {
+    display: none;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .rwd-table th:first-child,
+  .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child,
+  .rwd-table td:last-child {
+    padding-right: 0;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    padding: 1em !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .nav-menu {
+    transition: 1s;
+    width: 16rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    margin-top: 65px;
+}
+.nav-menu.active.w-20{
+  width: 0% !important;
+  left: -15%;
+}
+}
+
+@media screen and (max-width: 767px){
+  .nav-menu {
+    transition: 1s;
+    width: 16rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    margin-top: 65px;
+}
+.nav-menu.active.w-20{
+  width: 0% !important;
+  left: -15%;
+}
+
+  .inner-head{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .button-wrapper{
+    margin: 32px 0;
+  }
+  .button-wrapper:first-child{
+    margin-left: 0;
+  }
+}
