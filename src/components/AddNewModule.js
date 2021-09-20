@@ -42,7 +42,7 @@ const AddNewModule = () => {
         <>
         <Breadcrumb />
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Add New Role</h2>
+            <h2 className="text-blue-600 text-3xl mb-7">Add New Module</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
@@ -102,10 +102,10 @@ const AddNewModule = () => {
                 </div>
               
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
-                    <button className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
+                    <a href="/managemodule" className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</a>
                     <button className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
                
-                    >Add New User
+                    >Add New Module
                     
                     </button>
                 </div>

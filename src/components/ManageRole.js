@@ -15,11 +15,11 @@ const ManageRole = ({ data}) => {
                         <h2 className="text-blue-600 text-3xl">Manage Role</h2>
                         <div className="button-wrapper flex flex-row">
                             {/* <button className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Filter</button> */}
-                            <button className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
+                            <a href="/addrole" className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
                            
                             >Add New Role
                             
-                            </button>
+                            </a>
                         </div>
                     </div>
 

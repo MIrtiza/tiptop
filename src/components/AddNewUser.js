@@ -301,7 +301,7 @@ const tabs = [
                 <Tabs tabs={tabs} /* Props */ />
                 </div>
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
-                    <button className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
+                    <a href="/manageuser" className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</a>
                     <button className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
                
                     >Add New User

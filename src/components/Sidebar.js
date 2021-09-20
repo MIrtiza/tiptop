@@ -40,17 +40,17 @@ const showDropdown = () =>{
 
                                 <ul class={` text-sm subMenu pl-12 ${dropdownOpen ? "show" : "hidden"}`}>
                                 <li className="mb-3">
-                                        <a href="#" className="">
+                                        <a href="/Managerole" className="">
                                         Role
                                         </a>
                                     </li>
                                     <li className="mb-3">
-                                        <a href="#" className="">
+                                        <a href="/Manageorganization" className="">
                                         Organization
                                         </a>
                                     </li>
                                     <li className="mb-1">
-                                        <a href="#" className="">
+                                        <a href="/managemodule" className="">
                                         Module
                                         </a>
                                     </li>
