@@ -49,7 +49,7 @@
         content: attr(data-yes);
         text-transform: uppercase;
         padding-left: 10px;
-        background-color: #0d48b6;
+        background-color: #008550;
         color: #fff; }
     .toggle-switch-disabled {
       background-color: #ddd;
@@ -211,6 +211,24 @@
 .rwd-table td {
   padding: .5em 1em;
 }
+
+.breadcrumbs{
+  margin-bottom: 16px;
+}
+.breadcrumbs span:first-child .slash{
+  display: none;  
+}
+
+.bg-cus-green{
+  background-color: #008550;
+}
+.add-role-modal{
+  overflow-y: scroll;
+}
+.table-scroller{
+  overflow-y: scroll;
+  height: 500px;
+}
 @media screen and (max-width: 601px) {
   .rwd-table tr:nth-child(2) {
     border-top: none;
@@ -257,9 +275,17 @@
   width: 0% !important;
   left: -15%;
 }
+.table-scroller{
+  overflow-y: scroll;
+  height: 90%;
+}
 }
 
 @media screen and (max-width: 767px){
+  a,button{
+    font-size: 12px;
+    padding: 12px;
+  }
   .nav-menu {
     transition: 1s;
     width: 16rem;
@@ -283,5 +309,9 @@
   }
   .button-wrapper:first-child{
     margin-left: 0;
+  }
+  .table-scroller{
+    overflow-y: scroll;
+    height: 90%;
   }
 }

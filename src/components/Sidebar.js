@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import logo from '../assets/images/logo.png'
 import shortlogo from '../assets/images/short-logo.png'
-import { FaUserCircle, FaRegSun, FaUserFriends, FaLandmark, FaChevronDown } from 'react-icons/fa'
-import Dropdown from 'react-dropdown';
+import { FaRegSun, FaUserFriends, FaLandmark, FaChevronDown } from 'react-icons/fa'
 import 'react-dropdown/style.css';
+import { Link } from 'react-router-dom'
 const Sidebar = ({sidebar}) => {
 const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -24,11 +24,11 @@ const showDropdown = () =>{
                         </a>
                         <div className=" border-t border-gray-700">
                         
-                            <nav class="text-white">
+                            <nav className="text-white">
 
-                            <ul class="">
+                            <ul className="">
                             <li className="bg-gray-800 px-6 py-1">
-                                <button class="block py-4 hasSubMenu w-full relative text-left" onClick={showDropdown}> 
+                                <button className="block py-4 hasSubMenu w-full relative text-left" onClick={showDropdown}> 
                                 <FaUserFriends className="inline-block text-gray-100 text-2xl mr-4 " />{sidebar?"": "User"} 
                                 {sidebar ? "" :   
                                 <span className="absolute right-0">
@@ -38,26 +38,31 @@ const showDropdown = () =>{
                               
                                 </button>
 
-                                <ul class={` text-sm subMenu pl-12 ${dropdownOpen ? "show" : "hidden"}`}>
+                                <ul className={` text-sm subMenu pl-12 ${dropdownOpen ? "show" : "hidden"}`}>
                                 <li className="mb-3">
-                                        <a href="/Managerole" className="">
+                                        <Link to="/manageuser" className="">
+                                        User
+                                        </Link>
+                                    </li>
+                                <li className="mb-3">
+                                        <Link to="/Managerole" className="">
                                         Role
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="mb-3">
-                                        <a href="/Manageorganization" className="">
+                                        <Link to="/Manageorganization" className="">
                                         Organization
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="mb-1">
-                                        <a href="/managemodule" className="">
+                                        <Link to="/managemodule" className="">
                                         Module
-                                        </a>
+                                        </Link>
                                     </li>
                                     </ul>
                             </li>
-                            <li className="px-6 py-1"><a href="#" class="block py-4"> <FaLandmark className="inline-block text-gray-100 text-2xl mr-4" /> {sidebar?"": "Panel"} </a></li>
-                            <li className="px-6 py-1"><a href="#" class="block py-4"> <FaRegSun className="inline-block text-gray-100 text-2xl mr-4" />{sidebar?"": "Settings"}  </a></li>
+                            <li className="px-6 py-1"><Link to="/pools" className="block py-4"> <FaLandmark className="inline-block text-gray-100 text-2xl mr-4" /> {sidebar?"": "Pools"} </Link></li>
+                            <li className="px-6 py-1"><Link to="/settings" className="block py-4"> <FaRegSun className="inline-block text-gray-100 text-2xl mr-4" />{sidebar?"": "Settings"}  </Link></li>
                             </ul>
                         </nav>
               
