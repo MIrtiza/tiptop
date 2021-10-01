@@ -3,14 +3,11 @@ import Breadcrumb from './Breadcrumb'
 
 import Select from 'react-select';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import AddNewRole from './AddNewRole'
 import Tabbing from './Tabs'
-import uuid from 'react-uuid'
-import axios from "axios"
 
-const AddNewUser = ({data, permissionData}) => {
-    console.log("df"+ permissionData)
+const UpdateUser = ({data, permissionData}) => {
     const selectOrgoptions = [
         { value: 'Org 1', label: 'Org 1' },
         { value: 'Org 2', label: 'Org 2' },
@@ -26,41 +23,57 @@ const AddNewUser = ({data, permissionData}) => {
         { value: 'DEF', label: 'DEF' },
         { value: 'GHI', label: 'GHI' },
       ];
-      const selectStatusoptions = [
-        { value: false, label: 'false' },
-        { value: true, label: 'true' },
-      ];
 
-
+    //   current user id for update
+    const [currentUser, setCurrentUser] = useState();
+      const { id } = useParams();
+    //   setCurrentUser(id);
+      console.log("user update page current id :"+id)
     
     //   const {state} = props.location;
      
   
-  
+    const [selectOrg, setSelectOrg] = useState(null);
+    const [selectRole, setSelectRole] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
    
     const [orgmodalIsOpen, setOrgModalIsOpen] = useState(false);
     const [rolemodalIsOpen, setRoleModalIsOpen] = useState(false);
    
 
- 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [Userid, setID] = useState(id);
+    const [name, setName] = useState('test');
+    const [email, setEmail] = useState('test');
     const [password, setPassword] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [selectOrg, setSelectOrg] = useState(null);
-    const [selectRole, setSelectRole] = useState(null);
+    const [mobile, setMobile] = useState('453');
     const [status, setStatus] = useState(false);
-    const [date, setDate] = useState('');
-    const [error, setError] = useState('');
-    
+    // const [permissionData, setpermissionData] = useState([]);
+    console.log("update page current name :"+name)
+    console.log("update page current userid :"+Userid)
+    useEffect(() => {
+        setID(localStorage.getItem('id'))
+        setName(localStorage.getItem('name'));
+        setStatus(localStorage.getItem('status'));
+        // setRole(localStorage.getItem('role'))
+        // setOrganization(localStorage.getItem('organization'));
+        // setCreated(localStorage.getItem('created'));
+        // setPermission(localStorage.getItem('permission'));
+        setEmail(localStorage.getItem('email'));
+        setMobile(localStorage.getItem('mobile'));
+        // setpermissionData(localStorage.getItem('permissionData'));
 
-    const permissionObj = 
-    {
-      id:uuid(), 
-      name: "test",
-      type: "test type"
-    }
+
+
+        // const user = JSON.parse(localStorage.getItem('user'));
+        // console.log("user:"+ user.id)
+    }, []);
+
+
+
+
+
+
+
 
 
       const handleOrgOpenModal =()=> {
@@ -79,28 +92,7 @@ const AddNewUser = ({data, permissionData}) => {
       }
 
 
-      const onSubmitHandler=()=>{
-        let today = new Date();
-        let time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-        setDate(time);
-    
-        if(name, email === ''){
-            setError('Fields cannot be empty');
-            
-        }else{
-            const Add = async ()=>{
-                    await axios.post('http://localhost:3000/user/',{
-                        id:uuid(),name:name, status: status.value, created: date ,email: email, organization: selectOrg.value, role:selectRole.value, mobile: mobile,
-                        password: password, permission: permissionObj
-                    })
-            }
-            Add();
-            alert("User added, Thank you");
-
-        }
-      
-        
-       }
+ 
 
     return (
         <>
@@ -108,7 +100,11 @@ const AddNewUser = ({data, permissionData}) => {
      
         {/* {SearchResult} */}
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Add New User</h2>
+            <h2 className="text-blue-600 text-3xl mb-7">Update User</h2>
+
+            <div className="button-wrapper flex flex-row ml-auto justify-end mt-8 mb-7">
+                <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Reset Password</button>
+            </div>
         </div>
         {/* {data.map((item)=>{
             return(
@@ -117,6 +113,18 @@ const AddNewUser = ({data, permissionData}) => {
         })} */}
         <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3">
             <div className="col-span-2 lg:col-span-2 md:col-span-3 pr-0 md:pr-6 lg:pr-6">
+                <div className="mb-7">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+                        ID
+                    </label>
+                    <input 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
+                    id="id" 
+                    type="text" 
+                    value={Userid}
+                    disabled
+                    />
+                </div>
                 <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Name
@@ -142,18 +150,7 @@ const AddNewUser = ({data, permissionData}) => {
                     onChange={e=> setEmail(e.target.value)}
                     />
                 </div>
-                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
-                        Temporary Password
-                    </label>
-                    <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="password" 
-                    type="password" 
-                    value={password}
-                    onChange={e=> setPassword(e.target.value)}
-                    />
-                </div>
+                
 
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:block md:inline-block pr-0 md:pr-0 lg:pr-4">
                     <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
@@ -161,7 +158,7 @@ const AddNewUser = ({data, permissionData}) => {
                     </label>
                     <input 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="mobile" 
+                    id="username" 
                     type="text" 
                     value={mobile}
                     onChange={e=> setMobile(e.target.value)}
@@ -208,17 +205,6 @@ const AddNewUser = ({data, permissionData}) => {
                             <button className="ml-2 text-blue-700" onClick={handleRoleOpenModal}>Add new Role</button>
                         </div>
                 </div>
-                <div className="select-section mb-7">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                        Status
-                        </label>
-                    <Select
-                        onChange={setStatus}
-                        options={selectStatusoptions}
-                        name="user"
-                        value={status}
-                    />
-                </div>
             
                 <div className="select-section mb-7">
                 <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
@@ -235,12 +221,14 @@ const AddNewUser = ({data, permissionData}) => {
                 />
                 </div>
                 <div className="tabing-section mb-12">
-               
-                    <Tabbing permissionData={permissionData}  />
+                        {
+                          
+                        }
+                    <Tabbing  Userid={Userid} permissionData={permissionData} />
                 </div>
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
                     <Link to="/manageuser" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
-                    <button onClick={onSubmitHandler} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
+                    <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                
                     >Add New User
                     
@@ -293,12 +281,12 @@ const AddNewUser = ({data, permissionData}) => {
                     >
                       
                     {/* add role modal content */}
-                        <AddNewRole hide={"hidden"} permissionData={permissionData}  />
+                        <AddNewRole hide={"hidden"}  />
 
 
                         <div className="button-wrapper flex flex-row ml-auto justify-end mt-8">
-                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Close Modal</button>
-                            {/* <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Role</button> */}
+                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
+                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Role</button>
                         </div>
                     </Modal>
                 </div>
@@ -359,4 +347,4 @@ const AddNewUser = ({data, permissionData}) => {
     )
 }
 
-export default AddNewUser
+export default UpdateUser

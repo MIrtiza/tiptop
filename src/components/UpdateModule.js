@@ -1,11 +1,11 @@
-import {useState } from 'react'
+import {useState, useEffect } from 'react'
 import Breadcrumb from './Breadcrumb'
 import 'react-simple-tabs-component/dist/index.css'
 import Select from 'react-select';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import uuid from 'react-uuid'
 import axios from "axios"
-const AddNewModule = () => {
+const Updateodule = () => {
 
     const selectParameteroptions = [
         { value: 'Module1', label: 'Module1' },
@@ -21,34 +21,35 @@ const AddNewModule = () => {
         { value: false, label: 'false' },
         { value: true, label: 'true' },
       ];
-    const [selectParameter, setSelectParameter] = useState(null);
 
+      const { id } = useParams();
+
+
+    const [selectParameter, setSelectParameter] = useState(null);
     const [selectPlatform, setSelectPlatform] = useState(null);
 
+    const [Userid, setID] = useState(id);
     const [name, setName] = useState('');
     const [disc, setDisc] = useState('');
     const [status, setStatus] = useState(false);
+    // const [platform, setPlatform] = useState('');
+    // const [parameter, setParameter] = useState('');
     // const [platformName, setplatformName] = useState('');
     const [date, setDate] = useState('');
     const [error, setError] = useState('');
-    const onSubmitHandler=()=>{
-        let today = new Date();
-        let time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-        setDate(time);
-    
-        if(name, disc === ''){
-            setError('Fields cannot be empty');
-            
-        }else{
-            const Add = async ()=>{
-                    await axios.post('http://localhost:3000/module/',{id:uuid(),name:name, status: status.value, created: date ,discription: disc, platform: selectPlatform.value, parameter:selectParameter.value})
-            }
-            Add();
-            alert("Module added, Thank you");
-        }
-      
-        
-       }
+
+    useEffect(() => {
+        setID(localStorage.getItem('id'));
+        setName(localStorage.getItem('name'));
+        setStatus(localStorage.getItem('status'));
+        setDisc(localStorage.getItem('dics'));
+        setSelectPlatform(localStorage.getItem('platform'));
+        setSelectParameter(localStorage.getItem('parameter'));
+        // return () => {
+        //     cleanup
+        // }
+    }, [])
+  
 
     return (
         <>
@@ -131,8 +132,8 @@ const AddNewModule = () => {
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
                     <Link to="/managemodule" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
                     <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
-                    onClick={onSubmitHandler}
-                    >Add New Module
+                
+                    >Update Module
                     
                     </button>
                 </div>
@@ -173,4 +174,4 @@ const AddNewModule = () => {
     )
 }
 
-export default AddNewModule
+export default Updateodule

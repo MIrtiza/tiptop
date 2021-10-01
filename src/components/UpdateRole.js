@@ -1,13 +1,14 @@
 import {useState, useEffect } from 'react'
 import Breadcrumb from './Breadcrumb'
-
 import axios from "axios"
 import Select from 'react-select';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import uuid from 'react-uuid'
 import Tabbing from './Tabs'
-const AddNewRole = ({hide, permissionData}) => {
+
+
+const UpdateRole = ({hide, permissionData}) => {
 
     const selectoptions = [
         { value: 'ABC', label: 'ABC' },
@@ -18,15 +19,26 @@ const AddNewRole = ({hide, permissionData}) => {
         { value: false, label: 'false' },
         { value: true, label: 'true' },
       ];
-    const [results,setResult] = useState([]);
+
+      const { id } = useParams();
+    // const [results,setResult] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const [PermissionmodalIsOpen, setPermissionModalIsOpen] = useState(false);
 
+    
+    const [Userid, setID] = useState(id);
     const [name, setName] = useState('');
     const [disc, setDisc] = useState('');
     const [status, setStatus] = useState(false);
     const [date, setDate] = useState('');
     const [error, setError] = useState('');
+
+    useEffect(()=>{
+        setID(localStorage.getItem('id'));
+        setName(localStorage.getItem('name'));
+        setDisc(localStorage.getItem('disc'));
+        setStatus(localStorage.getItem('status'))
+    })
    
 
 
@@ -62,11 +74,23 @@ const AddNewRole = ({hide, permissionData}) => {
         <>
         <Breadcrumb />
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Add New Role</h2>
+            <h2 className="text-blue-600 text-3xl mb-7">Update Role</h2>
         </div>
 
         <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3`} >
             <div className="col-span-2 pr-6">
+            <div className="mb-7">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+                        ID
+                    </label>
+                    <input 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
+                    id="id" 
+                    type="text" 
+                    value={Userid}
+                    disabled
+                    />
+                </div>
                 <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
                         Role Name
@@ -122,13 +146,13 @@ const AddNewRole = ({hide, permissionData}) => {
                 </div>
                 <div className="tabing-section mb-12">
                
-                    <Tabbing permissionData={permissionData}  />
+                <Tabbing  Userid={Userid} permissionData={permissionData} />
                 </div>
-                <div className={`button-wrapper flex flex-row ml-auto justify-end `}>
-                    <Link to="/managerole" className={`px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3 ${hide}`}>Cancel</Link>
+                <div className={`button-wrapper flex flex-row ml-auto justify-end ${hide}`}>
+                    <Link to="/managerole" className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
                     <button className="px-9 py-2 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
-                    onClick={onSubmitHandler}
-                    >Add New Role
+                    
+                    >Update Role
                     
                     </button>
                 </div>
@@ -169,4 +193,5 @@ const AddNewRole = ({hide, permissionData}) => {
     )
 }
 
-export default AddNewRole
+
+export default UpdateRole

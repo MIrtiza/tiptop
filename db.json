@@ -1,18 +1,6 @@
 {
   "user": [
     {
-      "id": 1,
-      "email": "mirza@123.com",
-      "password": "123",
-      "name": "Nor ani A jail",
-      "status": false,
-      "role": "TM",
-      "organization": "PCD",
-      "created": "2021-12-24 12:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
-    },
-    {
       "id": 2,
       "email": "osama@gmail.com",
       "password": "123",
@@ -21,8 +9,17 @@
       "role": "TM",
       "organization": "PCD",
       "created": "2021-12-24 23:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
+      "permission": [
+        {
+          "name": "2-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "2-Uber Access",
+          "Type": "AWS"
+        }
+      ],
+      "mobile": "8881212"
     },
     {
       "id": 3,
@@ -33,8 +30,17 @@
       "role": "TM",
       "organization": "PCD",
       "created": "2021-12-24 23:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
+      "permission": [
+        {
+          "name": "3-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "3-Uber Access",
+          "Type": "AWS"
+        }
+      ],
+      "mobile": "8881212"
     },
     {
       "id": 4,
@@ -45,8 +51,17 @@
       "role": "TM",
       "organization": "PCD",
       "created": "2021-12-24 12:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
+      "permission": [
+        {
+          "name": "4-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "4-Uber Access",
+          "Type": "AWS"
+        }
+      ],
+      "mobile": "8881212"
     },
     {
       "id": 5,
@@ -57,8 +72,17 @@
       "role": "TM",
       "organization": "PCD",
       "created": "2021-12-24 23:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
+      "permission": [
+        {
+          "name": "5-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "5-Uber Access",
+          "Type": "AWS"
+        }
+      ],
+      "mobile": "8881212"
     },
     {
       "id": 6,
@@ -69,8 +93,39 @@
       "role": "TM",
       "organization": "PCD",
       "created": "2021-12-24 23:12:00",
-      "permission": "Administrator Access",
-      "permissionType": "AWS"
+      "permission": [
+        {
+          "name": "6-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "6-Uber Access",
+          "Type": "AWS"
+        }
+      ],
+      "mobile": "8881212"
+    }
+  ],
+  "permission": [
+    {
+      "id": 1,
+      "name": "Careem Access",
+      "Type": "AWS"
+    },
+    {
+      "id": 2,
+      "name": "Uber Access",
+      "Type": "AWS"
+    },
+    {
+      "id": 3,
+      "name": "Grab Access",
+      "Type": "AWS"
+    },
+    {
+      "id": 4,
+      "name": "Bykea Access",
+      "Type": "AWS"
     }
   ],
   "role": [
@@ -79,117 +134,85 @@
       "name": "TM",
       "status": false,
       "created": "2021-12-24 12:12:00",
-      "discription": "Teritory manager"
+      "discription": "Teritory manager",
+      "permission": [
+        {
+          "name": "1-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "1-Uber Access",
+          "Type": "AWS"
+        }
+      ]
     },
     {
       "id": 2,
       "name": "PR (PRM)",
       "status": false,
       "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access"
+      "discription": "Administrator Access",
+      "permission": [
+        {
+          "name": "2-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "2-Uber Access",
+          "Type": "AWS"
+        }
+      ]
     },
     {
       "id": 3,
       "name": "RS (RSM)",
       "status": true,
       "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access"
+      "discription": "Administrator Access",
+      "permission": [
+        {
+          "name": "3-Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "3-Uber Access",
+          "Type": "AWS"
+        }
+      ]
     },
     {
       "id": 4,
       "name": "ROM",
       "status": false,
       "created": "2021-12-24 12:12:00",
-      "discription": "Administrator Access"
+      "discription": "Administrator Access",
+      "permission": [
+        {
+          "name": "4-lahore Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "4-Uber Access",
+          "Type": "AWS"
+        }
+      ]
     },
     {
       "id": 5,
       "name": "RAM",
       "status": false,
       "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access"
-    },
-    {
-      "id": 6,
-      "name": "RN (Dealer)",
-      "status": true,
-      "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access"
-    },
-    {
-      "id": 7,
-      "name": "RN (Dealer)",
-      "status": true,
-      "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access"
-    },
-    {
-      "id": "8",
-      "name": "irtiza",
-      "status": true,
-      "created": "12,23,12",
-      "discription": "testing 123"
-    },
-    {
-      "id": "9",
-      "name": " osama irtiza",
-      "status": true,
-      "created": "12,23,12",
-      "discription": "testing 123"
-    },
-    {
-      "id": 10,
-      "name": " osama irtiza",
-      "status": true,
-      "created": "12,23,12",
-      "discription": "testing 123"
-    },
-    {
-      "id": 11,
-      "name": " amii irtiza",
-      "status": true,
-      "created": "12,23,12",
-      "discription": "testing 123"
-    },
-    {
-      "id": "ee8d28-16e-4c63-877e-f67b47547f0e",
-      "name": "Driver ",
-      "status": {
-        "value": true,
-        "label": "true"
-      },
-      "created": "12,23,12",
-      "discription": "Test driver"
-    },
-    {
-      "id": "77203d-086c-adc1-74f6-bf0d41702d81",
-      "name": "Driver ",
-      "status": {
-        "value": true,
-        "label": "true"
-      },
-      "created": "12,23,12",
-      "discription": "Test driver"
-    },
-    {
-      "id": "d2ba584-d668-54d7-afa6-45d184c023",
-      "name": "New Role",
-      "status": {
-        "value": false,
-        "label": "false"
-      },
-      "created": "2021-9-26 1:31:4",
-      "discription": "Airport boy"
-    },
-    {
-      "id": "65cc8f-b56b-6022-fa22-34a8b10af5d",
-      "name": "Manora safai",
-      "status": {
-        "value": false,
-        "label": "false"
-      },
-      "created": "",
-      "discription": "Mangali safai support"
+      "discription": "Administrator Access",
+      "permission": [
+        {
+          "name": "5-karachi Access",
+          "Type": "AWS"
+        },
+        {
+          "name": "5-Uber Access",
+          "Type": "AWS"
+        }
+      ]
     }
   ],
   "organization": [
@@ -250,7 +273,8 @@
       "status": false,
       "created": "2021-12-24 12:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 2,
@@ -258,7 +282,8 @@
       "status": false,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 3,
@@ -266,7 +291,8 @@
       "status": true,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 4,
@@ -274,7 +300,8 @@
       "status": false,
       "created": "2021-12-24 12:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 5,
@@ -282,7 +309,8 @@
       "status": false,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 6,
@@ -290,7 +318,8 @@
       "status": true,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
     },
     {
       "id": 6,
@@ -298,7 +327,53 @@
       "status": true,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
-      "platform": "Mobile App"
+      "platform": "Mobile App",
+      "parameter": "module 5"
+    },
+    {
+      "id": "138ae5-b6-a358-fa6e-7f3ac476c3",
+      "name": "Module aga khan",
+      "status": {
+        "value": false,
+        "label": "false"
+      },
+      "created": "",
+      "discription": "Kia liku bhaiii",
+      "platform": {
+        "value": "Platform2",
+        "label": "Platform2"
+      },
+      "parameter": {
+        "value": "Module2",
+        "label": "Module2"
+      }
+    },
+    {
+      "id": "0785272-defe-a75-3c5f-2cca7784e244",
+      "name": "test1",
+      "status": {
+        "value": true,
+        "label": "true"
+      },
+      "created": "",
+      "discription": "Trw svcs sdv",
+      "platform": {
+        "value": "Platform2",
+        "label": "Platform2"
+      },
+      "parameter": {
+        "value": "Module2",
+        "label": "Module2"
+      }
+    },
+    {
+      "id": "1b1b3d-72d8-66e7-ff6-6c227cfe54c",
+      "name": "New odule irtiza",
+      "status": true,
+      "created": "",
+      "discription": "New irtiza descriptipin",
+      "platform": "Platform3",
+      "parameter": "Module2"
     }
   ],
   "policy": [

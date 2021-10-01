@@ -59,9 +59,10 @@ const showDropdown = () =>{
                                         Module
                                         </Link>
                                     </li>
+                                    <li className="mb-1"><Link to="/pools" className="block py-4"> Pools </Link></li>
                                     </ul>
                             </li>
-                            <li className="px-6 py-1"><Link to="/pools" className="block py-4"> <FaLandmark className="inline-block text-gray-100 text-2xl mr-4" /> {sidebar?"": "Pools"} </Link></li>
+                            
                             <li className="px-6 py-1"><Link to="/settings" className="block py-4"> <FaRegSun className="inline-block text-gray-100 text-2xl mr-4" />{sidebar?"": "Settings"}  </Link></li>
                             </ul>
                         </nav>

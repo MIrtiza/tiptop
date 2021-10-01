@@ -3,11 +3,21 @@ import { useState } from 'react'
 import ToggleSwitch from './ToggleSwitch'
 import Pagination from './Pagination'
 import { Link } from 'react-router-dom'
-const ManageRole = ({ data}) => {
+
+const ManageRole = ({ data, permissionData}) => {
     const [ active, setActive ] = useState(true);
-    const checkedHandler = ()=>{
+
+    const setData = (data, idKey) => {
+        console.log(data);
         
-    }
+
+        let { id, name, status,discription  } = data[idKey];
+        localStorage.setItem('id', id);
+        localStorage.setItem('name', name);
+        localStorage.setItem('status', status);
+        localStorage.setItem('disc', discription);
+     }
+
     return (
         <>
                 <div className="flex flex-col h-full">        
@@ -32,17 +42,26 @@ const ManageRole = ({ data}) => {
                             <th className=" py-3 px-3 text-left" colSpan="2">Created</th>
                         </tr>
                         {
-                            data.reverse().map((result)=>{
+                            data.map((result)=>{
                             return( 
                                     <tr className="" key={result.id}>
                                 <td className=" py-3 px-3 text-left" data-th="Role Name">{result.name}</td>
                                 <td className=" py-3 px-3 text-left" data-th="Role Name">{result.discription}</td>
                                 <td className=" py-3 px-3 text-left" data-th="Discription">
-                                    {/* toggle switch */}
-                                    <ToggleSwitch id="toggle"   checked={ result.status.value } onChange={ (checked)=> setActive(checked) } />
+                                    {/* toggle switch ====  */}
+                                    <ToggleSwitch id="toggle" name={`check-${result.id}`}  checked={ result.status.value } onChange={ ()=> setActive(!active) } />
                                 </td>
                                 <td className=" py-3 px-3 text-left" data-th="Created">{result.created}</td>
-                                <td className=" py-3 px-3 text-left"> <Link to="/addrole" className="text-blue-800">Edit</Link> </td>
+                                <td className=" py-3 px-3 text-left"> 
+                                <Link  className="text-blue-800"
+                                  onClick={() => setData(data,result.id, permissionData)}
+                                  to={{
+                                      pathname: `/updaterole/${result.id}`,
+                                  }} 
+                                >
+                                 
+                                    Edit</Link> 
+                                </td>
 
                                 </tr>
                               
