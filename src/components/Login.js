@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react'
 import logo from '../assets/images/logo.png'
 import bgImage from '../assets/images/bg-login.jpg'
 import sponsorLogo from '../assets/images/sponsor-logo.svg'
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { useHistory, Link } from 'react-router-dom'
+// import axios from 'axios'
 export const Login = () => {
     
     const [email, setEmail] = useState('');
@@ -48,7 +48,7 @@ export const Login = () => {
                     <h1 className="text-3xl font-sans text-white my-8 text-center">Sign in to your account</h1>
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col  h-auto ">
                     <div className="mb-4">
-                        <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                        <label className="block text-grey-darker text-sm font-bold mb-2" htmlfor="username">
                             Email Address
                         </label>
                         <input 
@@ -83,15 +83,15 @@ export const Login = () => {
                             Forgot Password?
                         </a>
                     </div>
-                    <a 
-                    href="/panel"
+                    <button
+                   
                     className="bg-blue-700 border text-center text-white py-2 mt-5 border-blue-200 hover:text-white hover:bg-purple-600 hover:border-transparent 
                                         focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2" 
                     type="button"
                     onClick={Login()}
                     >
                             Sign In
-                    </a>
+                    </button>
                 </div>
                 </div>
             </div>
@@ -103,13 +103,13 @@ export const Login = () => {
                 </div>
                 <ul className="flex justify-items-center m-0 p-0 justify-center items-center list-none">
                     <li>
-                        <a href="/" className="text-white px-3">Privacy Policy</a>
+                        <Link to="/" className="text-white px-3">Privacy Policy</Link>
                     </li>
                     <li>
-                        <a href="/" className="text-white px-3">terms of Service</a>
+                        <Link to="/" className="text-white px-3">terms of Service</Link>
                     </li>
                     <li>
-                        <a href="/" className="text-white px-3">Support</a>
+                        <Link to="/" className="text-white px-3">Support</Link>
                     </li>
                 </ul>
             </div>

@@ -6,6 +6,7 @@ import axios from "axios"
 import Select from 'react-select';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
+import AddNewRole from './AddNewRole'
 const AddNewUser = () => {
     const selectOrgoptions = [
         { value: 'Org 1', label: 'Org 1' },
@@ -22,6 +23,7 @@ const AddNewUser = () => {
         { value: 'DEF', label: 'DEF' },
         { value: 'GHI', label: 'GHI' },
       ];
+     
     const [results,setResult] = useState([]);
     const [selectOrg, setSelectOrg] = useState(null);
     const [selectRole, setSelectRole] = useState(null);
@@ -29,21 +31,74 @@ const AddNewUser = () => {
     const [PermissionmodalIsOpen, setPermissionModalIsOpen] = useState(false);
     const [orgmodalIsOpen, setOrgModalIsOpen] = useState(false);
     const [rolemodalIsOpen, setRoleModalIsOpen] = useState(false);
+    const [permissionSearch, setPermissionSearch]= useState('');
  
+    // useEffect(()=>{
+    //     const search = async ()=>{
+    //         const {data} = await axios.get("http://localhost:3000/user/",{
+    //             params:{
+    //                 action: 'query',
+    //                 list: 'search',
+    //                 origin: '*',
+    //                 format: 'json',
+    //                 srsearch: permissionSearch
+    //             }
+    //         })
+
+    //         setResult(data);
+
+    //     }
+    //     search();
+    // },[permissionSearch]);
+
     useEffect(()=>{
         const search = async ()=>{
-            const {data} = await axios.get("http://localhost:3000/user/",{
+          const {data} =  await axios.get('http://localhost:3000/user/',{
                 params:{
-                    action: "query",
-                    format: "json"
+                    action: 'query',
+                    list: 'search',
+                    origin: '*',
+                    format: 'json',
+                    srsearch: permissionSearch
                 }
-            })
-
+            });
             setResult(data);
-
         }
-        search();
-    },[]);
+
+        if(permissionSearch && !results.length){
+            search();
+        }else{
+            const timeoutId = setTimeout(()=>{
+                if(permissionSearch){search()}
+            }, 500);
+    
+            return () =>{
+                clearTimeout(timeoutId);
+            }
+        }
+
+     
+     
+    },[permissionSearch])
+
+    // const SearchResult = results.map((result)=>{
+    //     return(
+    //         <div className="item" key={result.pageid}> 
+    //             <div className="right floated content">
+    //                 <a 
+    //                 href={`https://en.wikipedia.org?curid=${result.pageid}`}
+    //                 className="ui button">Go</a>
+    //             </div>
+    //             <div className="content">
+    //                 <div className="header">
+    //                     {result.title}
+    //                 </div>
+    //                 <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+                  
+    //             </div>
+    //         </div>
+    //     )
+    // })
 
     const handlePerOpenModal =()=> {
         setPermissionModalIsOpen(true);
@@ -67,14 +122,31 @@ const AddNewUser = () => {
      const handleRoleCloseModal= ()=> {
         setRoleModalIsOpen(false);
       }
+
+      const tableBody = results.map((result)=>{
+        return( 
+                <tr className="border-b-2 border-gray-200" key={result.id}>
+                    <td className="w-1/6 py-3 px-3 text-left">{result.permission}</td>    
+                     <td className="w-1/6 py-3 px-3 text-left">{result.permissionType}</td>                                            
+                </tr>
+        )
+    })
  
     const TabOne = () => {
         return (
           <>
-             <button  onClick={handlePerOpenModal} className="px-9 py-2 mt-4 bg-blue-800 border-2 border-indigo-500 text-white rounded-md">Add Permissions</button>
+             <button  onClick={handlePerOpenModal} className="px-9 py-2 mt-4 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Permissions</button>
               {/* Table start */}
-                    
-              <table class="table-fixed w-full my-6">
+                    <div className="element">
+                    <input 
+                                    value={permissionSearch}
+                                    onChange={e=> setPermissionSearch(e.target.value)}
+                                    type="text" name="permission" 
+                                    placeholder="Search Permision" 
+                                    className="border-2 py-3 px-4 w-5/12 inline-block"  
+                            />
+                    </div>
+              <table className="table-fixed w-full my-6">
                                 <thead className="bg-gray-100 border-b-2 border-gray-200">
                                     <tr>
                                         <th className="w-1/6 py-3 px-3 text-left">Policy name</th>
@@ -83,20 +155,7 @@ const AddNewUser = () => {
                                 </thead>
                                 <tbody>
                                     
-                                        {
-                                                results.map((result)=>{
-                                                return( 
-                                                    <>
-                                                        <tr className="border-b-2 border-gray-200" key={result.id}>
-                                                            <td className="w-1/6 py-3 px-3 text-left">{result.permission}</td>    
-                                                             <td className="w-1/6 py-3 px-3 text-left">{result.permissionType}</td>                                            
-                                                        </tr>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                        
-                                    
+                                    {tableBody}
                                 </tbody>
                             </table>
                         
@@ -107,12 +166,19 @@ const AddNewUser = () => {
                         <Modal
                         isOpen={PermissionmodalIsOpen}
                         contentLabel=" Modal"
+                        overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
                         >
                             <div className="modal-header flex justify-between items-center bg-gray-200 py-3 px-3">
-                            <input type="text" name="search" placeholder="Search Permision" className="border-2 py-3 px-4 w-5/12 inline-block"  />
+                            {/* <input 
+                                    value={permissionSearch}
+                                    onChange={e=> setPermissionSearch(e.target.value)}
+                                    type="text" name="search" 
+                                    placeholder="Search Permision" 
+                                    className="border-2 py-3 px-4 w-5/12 inline-block"  
+                            /> */}
                             <h6 className="ml-9 mb-0">Showing {results.length} results</h6>
                             </div>
-                        <table class="table-fixed w-full my-6">
+                        <table className="table-fixed w-full my-6">
                             <thead className="bg-gray-100 border-b-2 border-gray-200">
                                 <tr>
                                     <th className="w-1/6 py-3 px-3 text-left">Policy name</th>
@@ -120,28 +186,14 @@ const AddNewUser = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                    
-                                        {
-                                                results.map((result)=>{
-                                                return( 
-                                                    <>
-                                                        <tr className="border-b-2 border-gray-200" key={result.id}>
-                                                            <td className="w-1/6 py-3 px-3 text-left"> <input type="checkbox" name="name1" /> {result.permission}</td>    
-                                                             <td className="w-1/6 py-3 px-3 text-left"> {result.permissionType}</td>                                            
-                                                        </tr>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                        
-                                
+                                {tableBody}
                             </tbody>
                         </table>
 
-
+                        <button onClick={handlePerCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
                             <button 
                             onClick={handlePerCloseModal} 
-                            className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
+                            className="px-9 py-2 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                             >Submit
                             </button>
                         </Modal>
@@ -189,14 +241,20 @@ const tabs = [
     return (
         <>
         <Breadcrumb />
+        <input 
+            value={permissionSearch}
+            onChange={(e)=> setPermissionSearch(e.target.value)}
+            className="border-2 border-blue-300"
+        />
+        {/* {SearchResult} */}
         <div className="inner-head flex justify-between items-center">
             <h2 className="text-blue-600 text-3xl mb-7">Add New User</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3">
             <div className="col-span-2 lg:col-span-2 md:col-span-3 pr-0 md:pr-6 lg:pr-6">
                 <div className="mb-7">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Name
                     </label>
                     <input 
@@ -206,7 +264,7 @@ const tabs = [
                     />
                 </div>
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:block pr-0 md:pr-0 lg:pr-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Email Address
                     </label>
                     <input 
@@ -217,7 +275,7 @@ const tabs = [
                     />
                 </div>
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Temporary Password
                     </label>
                     <input 
@@ -228,7 +286,7 @@ const tabs = [
                 </div>
 
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:block md:inline-block pr-0 md:pr-0 lg:pr-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Mobile No.
                     </label>
                     <input 
@@ -239,7 +297,7 @@ const tabs = [
                 </div>
 
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pr-0 md:pr-0 lg:pr-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Organization
                     </label>
                     {/* <input 
@@ -263,7 +321,7 @@ const tabs = [
                         </div>
                 </div>
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                     Role
                     </label>
                     <Select
@@ -284,8 +342,8 @@ const tabs = [
                 </div>
             
                 <div className="select-section mb-7">
-                <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
-                    Search from select
+                <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+                    Search Stations
                     </label>
                 <Select
                     defaultValue={[selectoptions[1], selectoptions[3]]}
@@ -301,8 +359,8 @@ const tabs = [
                 <Tabs tabs={tabs} /* Props */ />
                 </div>
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
-                    <button className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                    <button className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
+                    <Link to="/manageuser" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
+                    <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                
                     >Add New User
                     
@@ -319,7 +377,7 @@ const tabs = [
                     >
                         <h2 className="text-blue-600 text-2xl mb-7">Add New Organization</h2>
                           <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
+                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" htmlFor="username">
                                     Organization NAme
                                 </label>
                                 <input 
@@ -329,7 +387,7 @@ const tabs = [
                                 />
                           </div>
                           <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
+                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" htmlFor="username">
                                     Registration No. 
                                 </label>
                                 <input 
@@ -339,8 +397,8 @@ const tabs = [
                                 />
                           </div>
                         <div className="button-wrapper flex flex-row ml-auto justify-end">
-                            <button onClick={handleOrgCloseModal} className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleOrgCloseModal} className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md">Add Organization</button>
+                            <button onClick={handleOrgCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
+                            <button onClick={handleOrgCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Organization</button>
                         </div>
                     </Modal>
                 </div>
@@ -350,33 +408,17 @@ const tabs = [
                     <Modal
                         isOpen={rolemodalIsOpen}
                         contentLabel=" Modal"
-                        className="w-2/6 h-2/6 bg-white m-auto border-2 absolute -inset-1/2 p-5"
+                        className=" w-11/12 h-4/5  bg-white m-auto border-2 absolute -inset-5 p-5 add-role-modal "
                        overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
                     >
-                          <h2 className="text-blue-600 text-2xl mb-7">Add New Role</h2>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Role NAme
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
-                          <div className="flex row items-center mb-6 justify-between">
-                            <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" for="username">
-                                    Registration No. 
-                                </label>
-                                <input 
-                                className="shadow appearance-none border rounded w-8/12 py-2 px-3 text-grey-darker" 
-                                id="organization" 
-                                type="text" 
-                                />
-                          </div>
+                      
+                    {/* add role modal content */}
+                        <AddNewRole hide={"hidden"}  />
+
+
                         <div className="button-wrapper flex flex-row ml-auto justify-end">
-                            <button onClick={handleRoleCloseModal} className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleRoleCloseModal} className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md">Add Role</button>
+                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
+                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Role</button>
                         </div>
                     </Modal>
                 </div>

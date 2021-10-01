@@ -1,10 +1,7 @@
-import {useState, useEffect } from 'react'
+import {useState } from 'react'
 import Breadcrumb from './Breadcrumb'
-import { Tabs } from 'react-simple-tabs-component'
 import 'react-simple-tabs-component/dist/index.css'
-import axios from "axios"
 import Select from 'react-select';
-import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 const AddNewModule = () => {
 
@@ -18,34 +15,18 @@ const AddNewModule = () => {
         { value: 'DEF', label: 'DEF' },
         { value: 'GHI', label: 'GHI' },
       ];
-    const [results,setResult] = useState([]);
-    const [selectedOption, setSelectedOption] = useState(null);
     const [selectParameter, setSelectParameter] = useState(null);
     const [selectPlatform, setSelectPlatform] = useState(null);
- 
-    useEffect(()=>{
-        const search = async ()=>{
-            const {data} = await axios.get("http://localhost:3000/user/",{
-                params:{
-                    action: "query",
-                    format: "json"
-                }
-            })
 
-            setResult(data);
-
-        }
-        search();
-    },[]);
 
     return (
         <>
         <Breadcrumb />
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Add New Role</h2>
+            <h2 className="text-blue-600 text-3xl mb-7">Add New Module</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
             <div className="col-span-2 pr-6">
                 <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
@@ -102,10 +83,10 @@ const AddNewModule = () => {
                 </div>
               
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
-                    <button className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                    <button className="px-9 py-2 bg-blue-800 border-2 border-indigo-500 text-white rounded-md"
+                    <Link to="/managemodule" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
+                    <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                
-                    >Add New User
+                    >Add New Module
                     
                     </button>
                 </div>
