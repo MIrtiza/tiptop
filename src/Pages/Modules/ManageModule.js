@@ -1,23 +1,23 @@
 
-import { useState } from 'react'
-import ToggleSwitch from './ToggleSwitch'
-import Pagination from './Pagination'
+import { useState,useEffect } from 'react'
+import ToggleSwitch from '../../components/ToggleSwitch'
+import Pagination from '../../components/Pagination'
 import { Link } from 'react-router-dom'
-const ManageModule = ({ data, permissionData}) => {
+import axios from 'axios'
+const ManageModule = () => {
 
     const [ active, setActive ] = useState(true);
+    const [module, setModule] = useState([]);
+    useEffect(() => {
 
-    const setData = (data, idKey) => {
-        let { id, name, status, discription,platform,parameter } = data[idKey];
-        localStorage.setItem('id', id);
-        localStorage.setItem('name', name);
-        localStorage.setItem('status', status);
-        localStorage.setItem('dics', discription);
-        localStorage.setItem('platform', platform);
-        localStorage.setItem('parameter', parameter);
-     
-        // localStorage.setItem('permissionData', permissionData);
-     }
+        loadUser();
+      }, [])
+ 
+      const loadUser = async () => {
+        const {data} = await axios.get(`http://localhost:3000/module/`);
+        setModule(data);
+        console.log("module :"+data);
+      };
  
     return (
         <>
@@ -48,7 +48,7 @@ const ManageModule = ({ data, permissionData}) => {
                                 <th className=" py-3 px-3 text-left" colSpan="2">Created</th>
                             </tr>
                             {
-                                data.map((result)=>{
+                                module.map((result)=>{
                                 return( 
                                         <tr className="" key={result.id}>
                                     <td className=" py-3 px-3 text-left" data-th="Module Name">{result.name}</td>
@@ -56,16 +56,12 @@ const ManageModule = ({ data, permissionData}) => {
                                     <td className=" py-3 px-3 text-left" data-th="Platform">{result.platform.value}</td>
                                     <td className=" py-3 px-3 text-left" data-th="Status">
                                         {/* toggle switch */}
-                                        <ToggleSwitch id="toggle" name={`check-${result.id}`}  checked={ result.status.value } onChange={ (checked)=> setActive(!active) } />
+                                        <ToggleSwitch id="toggle" name={`check-${result.id}`}  checked={ result.status } onChange={ (checked)=> setActive(checked) } />
                                     </td>
                                     <td className=" py-3 px-3 text-left" data-th="Created">{result.created}</td>
                                     <td className=" py-3 px-3 text-left"> 
-                                    <Link 
-                                    onClick={() => setData(data,result.id, permissionData)}
-                                    to={{
-                                        pathname: `/updatemodule/${result.id}`,
-                                    
-                                    }}
+                                    <Link
+                                    to={ `/updatemodule/${result.id}`}
                                      
                                     className="text-blue-800">Edit</Link> 
                                     

@@ -1,79 +1,67 @@
 import {useState, useEffect } from 'react'
-import Breadcrumb from './Breadcrumb'
+import Breadcrumb from '../../components/Breadcrumb'
 
 import Select from 'react-select';
 import Modal from 'react-modal';
-import { Link, useParams } from 'react-router-dom'
-import AddNewRole from './AddNewRole'
-import Tabbing from './Tabs'
+import { Link, useHistory } from 'react-router-dom'
+import AddNewRole from '../Roles/AddNewRole'
+import Tabbing from '../../components/Tabs'
+import uuid from 'react-uuid'
+import axios from "axios"
+import AddOrganization from '../Organizations/AddOrganization';
 
-const UpdateUser = ({data, permissionData}) => {
-    const selectOrgoptions = [
-        { value: 'Org 1', label: 'Org 1' },
-        { value: 'Org 2', label: 'Org 2' },
-        { value: 'Org 3', label: 'Org 3' },
-      ];
-      const selectRoleoptions = [
-        { value: 'Role 1', label: 'Role 1' },
-        { value: 'Role 2', label: 'Role 2' },
-        { value: 'Role 3', label: 'Role 3' },
-      ];
+const AddNewUser = ({ permissionData, orgOption, roleOption}) => {
+    let history = useHistory();
+ 
+      const [selectOrg, setSelectOrg] = useState(null);
+      let Orgoptions = orgOption.map((opt)=>{
+        return {value: opt.name, label: opt.name}
+        })
+      const [selectRole, setSelectRole] = useState(null);
+      let Roleoptions = roleOption.map((opt)=>{
+        return {value: opt.name, label: opt.name}
+        })
+
     const selectoptions = [
         { value: 'ABC', label: 'ABC' },
         { value: 'DEF', label: 'DEF' },
         { value: 'GHI', label: 'GHI' },
       ];
+      const selectStatusoptions = [
+        { value: false, label: 'false' },
+        { value: true, label: 'true' },
+      ];
 
-    //   current user id for update
-    const [currentUser, setCurrentUser] = useState();
-      const { id } = useParams();
-    //   setCurrentUser(id);
-      console.log("user update page current id :"+id)
+
     
     //   const {state} = props.location;
      
   
-    const [selectOrg, setSelectOrg] = useState(null);
-    const [selectRole, setSelectRole] = useState(null);
+  
     const [selectedOption, setSelectedOption] = useState(null);
    
     const [orgmodalIsOpen, setOrgModalIsOpen] = useState(false);
     const [rolemodalIsOpen, setRoleModalIsOpen] = useState(false);
    
 
-    const [Userid, setID] = useState(id);
-    const [name, setName] = useState('test');
-    const [email, setEmail] = useState('test');
+ 
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [mobile, setMobile] = useState('453');
+    const [mobile, setMobile] = useState('');
+   
     const [status, setStatus] = useState(false);
-    // const [permissionData, setpermissionData] = useState([]);
-    console.log("update page current name :"+name)
-    console.log("update page current userid :"+Userid)
-    useEffect(() => {
-        setID(localStorage.getItem('id'))
-        setName(localStorage.getItem('name'));
-        setStatus(localStorage.getItem('status'));
-        // setRole(localStorage.getItem('role'))
-        // setOrganization(localStorage.getItem('organization'));
-        // setCreated(localStorage.getItem('created'));
-        // setPermission(localStorage.getItem('permission'));
-        setEmail(localStorage.getItem('email'));
-        setMobile(localStorage.getItem('mobile'));
-        // setpermissionData(localStorage.getItem('permissionData'));
+    const [date, setDate] = useState('');
+    const [error, setError] = useState('');
+    
 
-
-
-        // const user = JSON.parse(localStorage.getItem('user'));
-        // console.log("user:"+ user.id)
-    }, []);
-
-
-
-
-
-
-
+   // for test
+    const permission = [
+        {
+            value:"permission 1",
+            type: "type 1"
+        }
+    ]
 
 
       const handleOrgOpenModal =()=> {
@@ -92,7 +80,24 @@ const UpdateUser = ({data, permissionData}) => {
       }
 
 
- 
+    useEffect(() => {
+        let today = new Date();
+        let time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        setDate(time);
+    }, []);
+
+    const onSubmitHandler=()=>{
+        // e.preventDefault();
+        const Add = async ()=>{
+            await axios.post('http://localhost:3000/user/',{
+                    id:uuid(),name:name, status: status.value, created: date ,email: email, organization: selectOrg.value, role:selectRole.value, mobile: mobile,
+                    password: password, permission: permission
+                })
+        }
+        Add();
+        history.push("/manageuser");
+        alert("added")        
+    }
 
     return (
         <>
@@ -100,11 +105,7 @@ const UpdateUser = ({data, permissionData}) => {
      
         {/* {SearchResult} */}
         <div className="inner-head flex justify-between items-center">
-            <h2 className="text-blue-600 text-3xl mb-7">Update User</h2>
-
-            <div className="button-wrapper flex flex-row ml-auto justify-end mt-8 mb-7">
-                <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Reset Password</button>
-            </div>
+            <h2 className="text-blue-600 text-3xl mb-7">Add New User</h2>
         </div>
         {/* {data.map((item)=>{
             return(
@@ -113,18 +114,6 @@ const UpdateUser = ({data, permissionData}) => {
         })} */}
         <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3">
             <div className="col-span-2 lg:col-span-2 md:col-span-3 pr-0 md:pr-6 lg:pr-6">
-                <div className="mb-7">
-                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
-                        ID
-                    </label>
-                    <input 
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="id" 
-                    type="text" 
-                    value={Userid}
-                    disabled
-                    />
-                </div>
                 <div className="mb-7">
                     <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                         Name
@@ -150,7 +139,18 @@ const UpdateUser = ({data, permissionData}) => {
                     onChange={e=> setEmail(e.target.value)}
                     />
                 </div>
-                
+                <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:inline-block md:inline-block pl-0 md:pl-0 lg:pl-4">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+                        Temporary Password
+                    </label>
+                    <input 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
+                    id="password" 
+                    type="password" 
+                    value={password}
+                    onChange={e=> setPassword(e.target.value)}
+                    />
+                </div>
 
                 <div className="mb-7 w-full md:w-full lg:w-3/6 block lg:block md:inline-block pr-0 md:pr-0 lg:pr-4">
                     <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
@@ -158,7 +158,7 @@ const UpdateUser = ({data, permissionData}) => {
                     </label>
                     <input 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
-                    id="username" 
+                    id="mobile" 
                     type="text" 
                     value={mobile}
                     onChange={e=> setMobile(e.target.value)}
@@ -171,11 +171,10 @@ const UpdateUser = ({data, permissionData}) => {
                     </label>
                  
                      <Select
-                        defaultValue={[selectOrgoptions[1], selectOrgoptions[3]]}
                        
                         // defaultValue={selectedOption}
                         onChange={setSelectOrg}
-                        options={selectOrgoptions}
+                        options={Orgoptions}
                         name="organization"
                         value={selectOrg}
                         className=""
@@ -190,11 +189,10 @@ const UpdateUser = ({data, permissionData}) => {
                     Role
                     </label>
                     <Select
-                        defaultValue={[selectRoleoptions[1], selectRoleoptions[3]]}
                        
                         // defaultValue={selectedOption}
                         onChange={setSelectRole}
-                        options={selectRoleoptions}
+                        options={Roleoptions}
                         name="organization"
                         value={selectRole}
                         className=""
@@ -204,6 +202,17 @@ const UpdateUser = ({data, permissionData}) => {
                             <span>or</span> 
                             <button className="ml-2 text-blue-700" onClick={handleRoleOpenModal}>Add new Role</button>
                         </div>
+                </div>
+                <div className="select-section mb-7">
+                    <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                        Status
+                        </label>
+                    <Select
+                        onChange={setStatus}
+                        options={selectStatusoptions}
+                        name="user"
+                        value={status}
+                    />
                 </div>
             
                 <div className="select-section mb-7">
@@ -221,14 +230,12 @@ const UpdateUser = ({data, permissionData}) => {
                 />
                 </div>
                 <div className="tabing-section mb-12">
-                        {
-                          
-                        }
-                    <Tabbing  Userid={Userid} permissionData={permissionData} />
+               
+                    <Tabbing permissionData={permissionData}  />
                 </div>
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
                     <Link to="/manageuser" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
-                    <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
+                    <button onClick={onSubmitHandler} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                
                     >Add New User
                     
@@ -240,10 +247,10 @@ const UpdateUser = ({data, permissionData}) => {
                     <Modal
                         isOpen={orgmodalIsOpen}
                         contentLabel=" Modal"
-                        className="w-2/6 h-2/6 bg-white m-auto border-2 absolute -inset-1/2 p-5"
+                        className=" w-11/12 h-4/5  bg-white m-auto border-2 absolute -inset-5 p-5 add-role-modal "
                         overlayClassName="inset-0 fixed bg-gray-900 bg-opacity-80"
                     >
-                        <h2 className="text-blue-600 text-2xl mb-7">Add New Organization</h2>
+                        {/* <h2 className="text-blue-600 text-2xl mb-7">Add New Organization</h2>
                           <div className="flex row items-center mb-6 justify-between">
                             <label className="block text-grey-darker text-sm font-bold mb-2 mr-4" htmlFor="username">
                                     Organization NAme
@@ -263,10 +270,12 @@ const UpdateUser = ({data, permissionData}) => {
                                 id="organization" 
                                 type="text" 
                                 />
-                          </div>
+                          </div> */}
+                           {/* add role modal content */}
+                        <AddOrganization hide={"hidden"} path="/adduser"  />
                         <div className="button-wrapper flex flex-row ml-auto justify-end mt-auto">
                             <button onClick={handleOrgCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleOrgCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Organization</button>
+                            {/* <button onClick={handleOrgCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Organization</button> */}
                         </div>
                     </Modal>
                 </div>
@@ -281,12 +290,10 @@ const UpdateUser = ({data, permissionData}) => {
                     >
                       
                     {/* add role modal content */}
-                        <AddNewRole hide={"hidden"}  />
-
-
+                        <AddNewRole hide={"hidden"} permissionData={permissionData} path="/adduser"  />
                         <div className="button-wrapper flex flex-row ml-auto justify-end mt-8">
-                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Role</button>
+                            <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Close Modal</button>
+                            {/* <button onClick={handleRoleCloseModal} className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md">Add Role</button> */}
                         </div>
                     </Modal>
                 </div>
@@ -347,4 +354,4 @@ const UpdateUser = ({data, permissionData}) => {
     )
 }
 
-export default UpdateUser
+export default AddNewUser

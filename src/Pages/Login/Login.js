@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
-import logo from '../assets/images/logo.png'
-import bgImage from '../assets/images/bg-login.jpg'
-import sponsorLogo from '../assets/images/sponsor-logo.svg'
+import logo from '../../assets/images/logo.png'
+import bgImage from '../../assets/images/bg-login.jpg'
+import sponsorLogo from '../../assets/images/sponsor-logo.svg'
 import { useHistory, Link } from 'react-router-dom'
 // import axios from 'axios'
 export const Login = () => {

@@ -1,25 +1,22 @@
 {
   "user": [
     {
-      "id": 2,
-      "email": "osama@gmail.com",
-      "password": "123",
-      "name": "Chandler ani A jail",
-      "status": false,
-      "role": "TM",
-      "organization": "PCD",
-      "created": "2021-12-24 23:12:00",
+      "name": "Naked ugly guy",
+      "status": true,
+      "created": "2021-10-4 2:14:3",
+      "email": "mirzaosama.wahid@petronas.com",
+      "organization": "Kuch b",
+      "role": " role PR (PRM)",
+      "mobile": "43221",
+      "password": "",
       "permission": [
         {
-          "name": "2-Careem Access",
-          "Type": "AWS"
-        },
-        {
-          "name": "2-Uber Access",
-          "Type": "AWS"
+          "id": 4,
+          "name": "Bykea Access",
+          "type": "AWS"
         }
       ],
-      "mobile": "8881212"
+      "id": 2
     },
     {
       "id": 3,
@@ -85,25 +82,21 @@
       "mobile": "8881212"
     },
     {
-      "id": 6,
-      "email": "osama@gmail.com",
-      "password": "123",
-      "name": "Racheal ani A jail",
+      "name": "mikail",
       "status": true,
-      "role": "TM",
-      "organization": "PCD",
-      "created": "2021-12-24 23:12:00",
+      "created": "2021-10-3 15:6:38",
+      "email": "mirzaosama.wahid@petronas.com",
+      "organization": "RS (RSM)",
+      "role": " role PR (PRM)",
+      "mobile": "5342",
+      "password": "BCBBCA",
       "permission": [
         {
-          "name": "6-Careem Access",
-          "Type": "AWS"
-        },
-        {
-          "name": "6-Uber Access",
-          "Type": "AWS"
+          "name": "permission 1",
+          "type": "type 1"
         }
       ],
-      "mobile": "8881212"
+      "id": 6
     }
   ],
   "permission": [
@@ -131,7 +124,7 @@
   "role": [
     {
       "id": 1,
-      "name": "TM",
+      "name": " role TM",
       "status": false,
       "created": "2021-12-24 12:12:00",
       "discription": "Teritory manager",
@@ -148,24 +141,36 @@
     },
     {
       "id": 2,
-      "name": "PR (PRM)",
-      "status": false,
-      "created": "2021-12-24 23:12:00",
+      "name": " role PR (PRM)",
       "discription": "Administrator Access",
+      "created": "2021-10-2 18:25:8",
+      "status": false,
       "permission": [
         {
-          "name": "2-Careem Access",
+          "id": 1,
+          "name": "Careem Access",
           "Type": "AWS"
         },
         {
-          "name": "2-Uber Access",
+          "id": 2,
+          "name": "Uber Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 3,
+          "name": "Grab Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 4,
+          "name": "Bykea Access",
           "Type": "AWS"
         }
       ]
     },
     {
       "id": 3,
-      "name": "RS (RSM)",
+      "name": "role RS (RSM)",
       "status": true,
       "created": "2021-12-24 23:12:00",
       "discription": "Administrator Access",
@@ -182,7 +187,7 @@
     },
     {
       "id": 4,
-      "name": "ROM",
+      "name": "role ROM",
       "status": false,
       "created": "2021-12-24 12:12:00",
       "discription": "Administrator Access",
@@ -199,36 +204,133 @@
     },
     {
       "id": 5,
-      "name": "RAM",
+      "name": "lst ROM",
       "status": false,
-      "created": "2021-12-24 23:12:00",
+      "created": "2021-12-24 12:12:00",
       "discription": "Administrator Access",
       "permission": [
         {
-          "name": "5-karachi Access",
+          "name": "4-lahore Access",
           "Type": "AWS"
         },
         {
-          "name": "5-Uber Access",
+          "name": "4-Uber Access",
           "Type": "AWS"
+        }
+      ]
+    },
+    {
+      "name": "New data update",
+      "discription": "New pak pakistan",
+      "status": true,
+      "created": "2021-10-3 11:59:56",
+      "permission": [
+        {
+          "id": 1,
+          "name": "Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 2,
+          "name": "Uber Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 3,
+          "name": "Grab Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 4,
+          "name": "Bykea Access",
+          "Type": "AWS"
+        }
+      ],
+      "id": "3f8ff4-b3f5-75a-2dbc-7b7b0ce3143"
+    },
+    {
+      "name": "kuch b",
+      "discription": "bnm",
+      "status": true,
+      "created": "2021-10-3 12:11:17",
+      "permission": [
+        {
+          "id": 1,
+          "name": "Careem Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 2,
+          "name": "Uber Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 3,
+          "name": "Grab Access",
+          "Type": "AWS"
+        },
+        {
+          "id": 4,
+          "name": "Bykea Access",
+          "Type": "AWS"
+        }
+      ],
+      "id": "b43880c-3074-7b6-518-e1572ac78f"
+    },
+    {
+      "id": "8e24051-43f8-c275-477c-bb0c633f562",
+      "name": "Sarah new",
+      "status": true,
+      "created": "2021-10-3 12:7:46",
+      "discription": "New disc",
+      "permission": [
+        {
+          "value": "permission 1",
+          "type": "type 1"
+        }
+      ]
+    },
+    {
+      "id": "3f57a84-83c6-2ede-6a1f-c46c881ed3",
+      "name": "User new role",
+      "status": true,
+      "created": "2021-10-3 13:24:51",
+      "discription": "New bilkul new",
+      "permission": [
+        {
+          "value": "permission 1",
+          "type": "type 1"
+        }
+      ]
+    },
+    {
+      "id": "5bb1a2-0b3-8fb-1ba5-72811c14e04",
+      "name": "meoww new",
+      "status": true,
+      "created": "2021-10-3 13:31:2",
+      "discription": "Eoww 11",
+      "permission": [
+        {
+          "value": "permission 1",
+          "type": "type 1"
         }
       ]
     }
   ],
   "organization": [
     {
-      "id": 1,
-      "name": "Dealer company Sdn Bhd",
-      "status": false,
-      "created": "2021-12-24 12:12:00",
-      "registraionNumber": "12345-x"
+      "name": "New data organization",
+      "registraionNumber": "12345-xvwdc",
+      "status": true,
+      "created": "2021-10-3 1:13:10",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "PR (PRM)",
-      "status": false,
-      "created": "2021-12-24 23:12:00",
-      "registraionNumber": "Administrator Access"
+      "name": "Kuch b",
+      "registraionNumber": "Han han miracless",
+      "status": true,
+      "created": "2021-10-3 1:23:36",
+      "id": 2
     },
     {
       "id": 3,
@@ -238,11 +340,11 @@
       "registraionNumber": "Administrator Access"
     },
     {
-      "id": 4,
-      "name": "ROM",
+      "name": "Abi hum zinda ha",
+      "registraionNumber": "32-brv",
       "status": false,
-      "created": "2021-12-24 12:12:00",
-      "registraionNumber": "Administrator Access"
+      "created": "2021-10-3 1:25:17",
+      "id": 4
     },
     {
       "id": 5,
@@ -264,6 +366,34 @@
       "status": true,
       "created": "2021-12-24 23:12:00",
       "registraionNumber": "Administrator Access"
+    },
+    {
+      "id": "f2c7d30-b455-2566-a1d7-ea537f853d7",
+      "name": "Avanza solution",
+      "registraionNumber": "BBQ-1234",
+      "status": true,
+      "created": ""
+    },
+    {
+      "id": "e0dc4ef-cbd2-b46-5684-5413453aaf7",
+      "name": "heloo",
+      "registraionNumber": "Ha bolo",
+      "status": false,
+      "created": "2021-10-3 1:35:59"
+    },
+    {
+      "id": "52cce16-ba00-be28-384-b6c56bbc0efc",
+      "name": "test 1",
+      "registraionNumber": "erfcrew",
+      "status": true,
+      "created": "2021-10-3 1:44:15"
+    },
+    {
+      "id": "b163fdd-20fb-327a-76c-c54f75f5af2",
+      "name": "New org bhai",
+      "registraionNumber": "5342jh",
+      "status": true,
+      "created": "2021-10-3 13:49:11"
     }
   ],
   "module": [
@@ -277,22 +407,13 @@
       "parameter": "module 5"
     },
     {
-      "id": 2,
-      "name": "PR (PRM)",
-      "status": false,
-      "created": "2021-12-24 23:12:00",
+      "name": "RS (RSM) update",
       "discription": "Administrator Access",
-      "platform": "Mobile App",
-      "parameter": "module 5"
-    },
-    {
-      "id": 3,
-      "name": "RS (RSM)",
       "status": true,
-      "created": "2021-12-24 23:12:00",
-      "discription": "Administrator Access",
-      "platform": "Mobile App",
-      "parameter": "module 5"
+      "parameter": "Module2",
+      "platform": "Platform2",
+      "created": "2021-10-2 15:26:35",
+      "id": 3
     },
     {
       "id": 4,
@@ -322,7 +443,7 @@
       "parameter": "module 5"
     },
     {
-      "id": 6,
+      "id": 7,
       "name": "RN (Dealer)",
       "status": true,
       "created": "2021-12-24 23:12:00",
@@ -374,6 +495,24 @@
       "discription": "New irtiza descriptipin",
       "platform": "Platform3",
       "parameter": "Module2"
+    },
+    {
+      "id": "e5bba32-d360-5a5b-b51f-6e2ddaefbb",
+      "name": "New data",
+      "status": true,
+      "created": "2021-10-3 2:8:29",
+      "discription": "New disc",
+      "platform": "Platform3",
+      "parameter": "Module3"
+    },
+    {
+      "id": "caa4a4a-bbb1-b5f-067-fabd15c8301",
+      "name": "Ye bik gai h govt",
+      "status": true,
+      "created": "2021-10-3 2:51:54",
+      "discription": "Ye sary mil k hame pagal bna rhe ha",
+      "platform": "Platform3",
+      "parameter": "Module3"
     }
   ],
   "policy": [
@@ -435,6 +574,40 @@
       "name": "mujahid (Dealer)",
       "type": "pool cool",
       "discription": "Administrator Access"
+    }
+  ],
+  "platforms": [
+    {
+      "id": 2,
+      "value": "plat 1",
+      "label": "plat 1"
+    },
+    {
+      "id": 2,
+      "value": "plat 2",
+      "label": "plat 2"
+    },
+    {
+      "id": 3,
+      "value": "plat 3",
+      "label": "plat 3"
+    }
+  ],
+  "parameters": [
+    {
+      "id": 2,
+      "value": "parameter 1",
+      "label": "parameter 1"
+    },
+    {
+      "id": 2,
+      "value": "parameter 2",
+      "label": "parameter 2"
+    },
+    {
+      "id": 3,
+      "value": "parameter 3",
+      "label": "parameter 3"
     }
   ]
 }

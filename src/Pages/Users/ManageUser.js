@@ -1,35 +1,32 @@
 
-import { useState } from 'react'
-import ToggleSwitch from './ToggleSwitch'
-import Pagination from './Pagination'
-import { Link, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import ToggleSwitch from '../../components/ToggleSwitch'
+import Pagination from '../../components/Pagination'
+import { Link } from 'react-router-dom'
 import Select from 'react-select';
-const ManageUser = ({ data, poolsdata, permissionData}) => {
-    // const [results,setResult] = useState(data);
+import axios from 'axios'
+const ManageUser = ({ poolsdata}) => {
     const [ active, setActive ] = useState(true);
  
     const [selectPool, setSelectPool] = useState(null);
     let pooloption = poolsdata.map((pool)=>{
         return {value: pool.name, label: pool.name}
     })
-  const {id} = useParams();
-    const setData = (data, idKey) => {
-        // localStorage.setItem('user', JSON.stringify(data));
-        console.log(data);
-        
 
-        let { id, name, status, role,organization, created,permission, mobile,email } = data[idKey];
-        localStorage.setItem('id', id);
-        localStorage.setItem('name', name);
-        localStorage.setItem('status', status);
-        localStorage.setItem('role', role);
-        localStorage.setItem('organization', organization);
-        localStorage.setItem('created', created);
-        localStorage.setItem('permission', permission);
-        localStorage.setItem('email', email)
-        localStorage.setItem('mobile', mobile)
-        // localStorage.setItem('permissionData', permissionData);
-     }
+
+
+     const [users, setUsers] = useState([]);
+
+     useEffect(() => {
+
+        loadUser();
+      }, [])
+ 
+      const loadUser = async () => {
+        const {data} = await axios.get(`http://localhost:3000/user/`);
+        setUsers(data);
+        console.log("user :"+data);
+      };
 
   
     return (
@@ -79,7 +76,7 @@ const ManageUser = ({ data, poolsdata, permissionData}) => {
                                
                             </tr>
                             {
-                                data.map((result)=>{
+                                users.map((result)=>{
                                 return( 
                                 
                                         <tr className="" key={result.id}>
@@ -96,13 +93,7 @@ const ManageUser = ({ data, poolsdata, permissionData}) => {
                                     <td className=" py-3 px-3 text-left" data-th="Created">{result.created}</td>
                                     <td className=" py-3 px-3 text-left"> 
                                     <Link 
-                                    onClick={() => setData(data,result.id, permissionData)}
-                                    to={{
-                                        pathname: `/updateuser/${result.id}`,
-                                    
-                                        // state: [{id:result.id, name: result.name, status: result.status, role: result.role, organization: result.organization, created: result.created}]
-                                    }}
-                                    // to="/updateuser"
+                                    to={ `/updateuser/${result.id}`}
                                      
                                     className="text-blue-800">Edit</Link> 
                                     

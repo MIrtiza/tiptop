@@ -1,66 +1,29 @@
 import { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import axios from "axios"
-const Tabs =({permissionData, Userid})=> {
+const Tabs =({permissionData, Userid, onChange})=> {
     const [PerAPI,setPerAPI] = useState([]);
     const [PermissionmodalIsOpen, setPermissionModalIsOpen] = useState(false);
     const [permissionSearch, setPermissionSearch]= useState('');
   const [toggleState, setToggleState] = useState(1);
   const [ischecked, setChecked] = useState(false);
-  // console.log("checked : "+ ischecked)
   const [CurrentuserId, CurrentsetUserID] = useState(Userid);
 
-  const toggleCheckboxChange = (e, name) => {
-    setChecked({
-      ischecked:false,
-      [name]: e.target.checked
-    })
-  }
+  // const toggleCheckboxChange = (e, name) => {
+  //   setChecked({
+  //     ischecked:false,
+  //     [name]: e.target.checked
+  //   })
+  // }
   const [permissionRest, setPermissionRest] = useState([]);
   console.log("tabs page id :"+ CurrentuserId)
-  console.log("tabs page user :"+ PerAPI);
-
-
-
-
-
-  
-  // useEffect(()=>{
-  //   Modal.setAppElement('body');
-  //   const search = async ()=>{
-  //     const {data} =  await axios.get(`http://localhost:3000/user/?permission=${permissionSearch}`,{
-  //           params:{
-  //               action: 'query',
-  //               list: 'search',
-  //               origin: '*',
-  //               format: 'json',
-  //               srsearch: permissionSearch
-  //           }
-  //       });
-  //       setResult(data);
-  //   }
-
-  //    if(permissionSearch && !results.length){
-  //        search();
-  //    }else{
-  //        const timeoutId = setTimeout(()=>{
-  //            if(permissionSearch){search()}
-  //        }, 500);
-
-  //    return () =>{
-  //            clearTimeout(timeoutId);
-  //        }
-  //    }
-
-  //       search();
-        
-  // },[permissionSearch])
+  console.log("selected row :"+ permissionRest);
 
         
         useEffect(()=>{
           Modal.setAppElement('body');
             const search = async ()=>{
-                const {data} =  await axios.get(`http://localhost:3000/user?id=${CurrentuserId}`,{
+                const {data} =  await axios.get(`http://localhost:3000/user?id=${Userid}`,{
                       params:{
                           action: 'query',
                           list: 'search',
@@ -74,29 +37,16 @@ const Tabs =({permissionData, Userid})=> {
         },[])
 
 
-        function onSubmitHandler() {
-          axios
-            .put(`http://localhost:3000/user/1`, {
-              permission: permissionRest
-            })
-            .then((response) => {
-              // setPost(response.data);
-            });
-        }
-        // const onSubmitHandler=()=>{
-    
-              // const Add = async ()=>{
-              //         await axios.put(`http://localhost:3000/user?id=1`,{
-              //           permission: permissionRest
-              //         })
-              // }
-              // Add();
-
-              // alert("permission added");
-
-              
-          
-        //  }
+        // function onSubmitHandler() {
+        //   axios
+        //     .put(`http://localhost:3000/user/${Userid}`, {
+        //       permission: permissionRest
+        //     })
+        //     .then((response) => {
+        //       // setPost(response.data);
+        //     });
+        // }
+  
 
 
 const handlePerOpenModal =()=> {
@@ -123,33 +73,30 @@ const handlePerOpenModal =()=> {
     // );
 
     setCheckedState(position);
-    console.log("name:"+permissionData[position].name+ "--type:"+ permissionData[position].Type);
-    const permissionObj = 
+    console.log("name:"+permissionData[position].name+ "--type:"+ permissionData[position].Type+ "id :"+ permissionData[position].id);
+    const permissionObj = [
     {
       id:permissionData[position].id, 
       name: permissionData[position].name,
       type: permissionData[position].Type
-    }
+    }]
 
-    setPermissionRest(permissionObj);
+    setPermissionRest([...permissionObj], permissionRest);
+    console.log("selected row obj :"+ permissionRest)
   }
 
+  onChange(permissionRest);
 
 
-  // this function show all permissions arrary in modal table
+
+  // this function modal show all permissions arrary in modal table
   const tableBody = permissionData.map((result, index)=>{
     return( 
             <tr className={`border-b-2 border-gray-200 `} key={result.id}>
 
               <td>
-                {/* <input
-                      type="checkbox"
-                      checked={ischecked}
-                      onChange={toggleCheckboxChange}
-                  />  */}
+                
                   <input type='checkbox'
-                    // onChange={(e) => toggleCheckboxChange(e, result.name)}
-                    // checked={ischecked[result.name]}
                     checked={checkedState[index]}
                     onChange={() => handleOnChange(index)}
                   />
@@ -197,32 +144,51 @@ const handlePerOpenModal =()=> {
                  </thead>
                  <tbody>
                      
-                     {/* {tableBody} user assigned permission table */}
+                     {/* this is selected row data which coming from modal*/}
                     
                        {
-                         PerAPI.map((per)=>{
+                         permissionRest.map((per)=>{
                            return(
                             <>
-                            
-                            {
-                              per.permission.map((item)=>{
-                                return(
+                         
                                  
                                   <tr className="border-b-2 border-gray-200" key={per.id}>
-                                  <td className="w-1/6 py-3 px-3 text-left">{item.name}</td>    
-                                  <td className="w-1/6 py-3 px-3 text-left">{item.Type}</td>  
+                                  <td className="w-1/6 py-3 px-3 text-left">{per.name}</td>    
+                                  <td className="w-1/6 py-3 px-3 text-left">{per.Type}</td>  
                                   </tr>
                                  
-                                )
-                               
-                              })
-                              
-                            }
+                          
                          </>
                            )
                         
                          })
 
+                       }
+
+
+                       {/* this is user data which is in user api */}
+                       {
+                            PerAPI.map((per)=>{
+                              return(
+                               <>
+                               {
+                                 per.permission.map((item)=>{
+                                   return(
+                                    
+                                     <tr className="border-b-2 border-gray-200" key={per.id}>
+                                     <td className="w-1/6 py-3 px-3 text-left">{item.name}</td>    
+                                     <td className="w-1/6 py-3 px-3 text-left">{item.Type}</td>  
+                                     </tr>
+                                    
+                                   )
+                                  
+                               }
+                                 
+                                 )}
+                            </>
+                              )
+                           
+                            })
                        }
                         {/* <td className="w-1/6 py-3 px-3 text-left">{permission[0]}</td>    
                         <td className="w-1/6 py-3 px-3 text-left">{permission}</td>                                             */}
@@ -266,7 +232,7 @@ const handlePerOpenModal =()=> {
 
                      <button onClick={handlePerCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
                          <button 
-                         onClick={onSubmitHandler} 
+                        //  onClick={onSubmitHandler} 
                          className="px-9 py-2 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                          >Submit
                          </button>

@@ -1,23 +1,24 @@
 
-import { useState } from 'react'
-import ToggleSwitch from './ToggleSwitch'
-import Pagination from './Pagination'
+import { useState, useEffect } from 'react'
+import ToggleSwitch from '../../components/ToggleSwitch'
+import Pagination from '../../components/Pagination'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-const ManageRole = ({ data, permissionData}) => {
+const ManageRole = () => {
     const [ active, setActive ] = useState(true);
+    const [role, setRole] = useState([]);
 
-    const setData = (data, idKey) => {
-        console.log(data);
-        
+     useEffect(() => {
 
-        let { id, name, status,discription  } = data[idKey];
-        localStorage.setItem('id', id);
-        localStorage.setItem('name', name);
-        localStorage.setItem('status', status);
-        localStorage.setItem('disc', discription);
-     }
-
+        loadUser();
+      }, [])
+ 
+      const loadUser = async () => {
+        const {data} = await axios.get(`http://localhost:3000/role/`);
+        setRole(data);
+        console.log("module :"+data);
+      };
     return (
         <>
                 <div className="flex flex-col h-full">        
@@ -42,24 +43,19 @@ const ManageRole = ({ data, permissionData}) => {
                             <th className=" py-3 px-3 text-left" colSpan="2">Created</th>
                         </tr>
                         {
-                            data.map((result)=>{
+                            role.map((result)=>{
                             return( 
                                     <tr className="" key={result.id}>
                                 <td className=" py-3 px-3 text-left" data-th="Role Name">{result.name}</td>
                                 <td className=" py-3 px-3 text-left" data-th="Role Name">{result.discription}</td>
                                 <td className=" py-3 px-3 text-left" data-th="Discription">
                                     {/* toggle switch ====  */}
-                                    <ToggleSwitch id="toggle" name={`check-${result.id}`}  checked={ result.status.value } onChange={ ()=> setActive(!active) } />
+                                    <ToggleSwitch id="toggle" name={`check-${result.id}`}  checked={ result.status.value } onChange={ (checked)=> setActive(checked)} />
                                 </td>
                                 <td className=" py-3 px-3 text-left" data-th="Created">{result.created}</td>
                                 <td className=" py-3 px-3 text-left"> 
-                                <Link  className="text-blue-800"
-                                  onClick={() => setData(data,result.id, permissionData)}
-                                  to={{
-                                      pathname: `/updaterole/${result.id}`,
-                                  }} 
-                                >
-                                 
+                                    <Link  className="text-blue-800"
+                                     to={ `/updaterole/${result.id}`} >
                                     Edit</Link> 
                                 </td>
 
