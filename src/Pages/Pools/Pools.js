@@ -1,5 +1,27 @@
 
-const Pools = ({poolsdata}) => {
+
+import { useState,useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+const Pools = () => {
+
+    const [pool, setPool] = useState([])
+
+    useEffect(() => {
+
+        loadUser();
+      }, [])
+ 
+      const loadUser = async () => {
+        const {data} = await axios.get(`http://localhost:3000/pools/`);
+        setPool(data);
+        console.log("pool :"+data);
+      };
+
+    const deleteUser = async id => {
+        await axios.delete(`http://localhost:3000/pools/${id}`);
+        loadUser();
+      };
     return (
         <div className="pools-container">
             <div className="flex flex-col">
@@ -39,16 +61,21 @@ const Pools = ({poolsdata}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {poolsdata.map((poolitem, poolindex) => (
+                        {pool.map((poolitem, poolindex) => (
                         <tr key={poolitem.id} className={poolindex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{poolitem.id}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{poolitem.name}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{poolitem.type}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{poolitem.discription}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                            <Link to="#" className="text-indigo-600 hover:text-indigo-900">
                                 Edit
-                            </a>
+                            </Link>
+                            <button 
+                                className="pl-3 text-red-300"
+                                    onClick={()=>deleteUser(poolitem.id)}
+                                >Delete
+                            </button>
                             </td>
                         </tr>
                         ))}

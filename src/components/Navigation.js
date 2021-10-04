@@ -21,34 +21,16 @@ import UpdateOrganization from '../Pages/Organizations/UpdateOrganization'
 const Navigation = (props) => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-    const [userResults,setUserResult] = useState([]);
+    // const [userResults,setUserResult] = useState([]);
     const [roleResults,setRoleResult] = useState([]);
     const [orgResults,setOrgResult] = useState([]);
-    const [moduleResults,setModuleResult] = useState([]);
+    // const [moduleResults,setModuleResult] = useState([]);
     const [permissionResults,setpermissionResult] = useState([]);
     const [pool,setpool] = useState([]);
     const [platform, setPlatform]= useState([]);
     const [parameter, setParameter]= useState([]);
 
-    useEffect(()=>{
-        // let id= props.match.params.id;
-        const search = async ()=>{
-            const {data} = await axios.get("http://localhost:3000/user/",{
-                params:{
-                    action: "query",
-                    format: "json"
-                }
-                
-            })
-            // props.history.push('/add');
-
-            setUserResult(data);
-
-        }
-        search();
-    },[]);
-    useEffect(()=>{
-        // let id= props.match.params.id;
+    const PermissionLoad = ()=>{
         const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/permission/",{
                 params:{
@@ -57,34 +39,28 @@ const Navigation = (props) => {
                 }
                 
             })
-            // props.history.push('/add');
-
             setpermissionResult(data);
 
         }
         search();
-    },[]);
-
-    useEffect(()=>{
+    }
+    const roleLOad = ()=>{
         const search = async ()=>{
-            const {data} = await axios.get("http://localhost:3000/role/",{
-                params:{
-                    action: "query",
-                    format: "json"
-                }
-            })
+        const {data} = await axios.get("http://localhost:3000/role/",{
+            params:{
+                action: "query",
+                format: "json"
+            }
+        })
 
-            setRoleResult(data);
+        setRoleResult(data);
 
         }
-        // const Add = async ()=>{
-        //      await axios.post('http://localhost:3000/role/',{id:11,name:" amii irtiza", status: true, created:"12,23,12",discription: "testing 123"})
-        // }
-        // Add();
+ 
         search();
-    },[]);
-    useEffect(()=>{
-        const search = async ()=>{
+    }
+    const OrganizationLoad = ()=>{
+     const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/organization/",{
                 params:{
                     action: "query",
@@ -96,23 +72,8 @@ const Navigation = (props) => {
 
         }
         search();
-    },[]);
-    useEffect(()=>{
-        const search = async ()=>{
-            const {data} = await axios.get("http://localhost:3000/module/",{
-                params:{
-                    action: "query",
-                    format: "json"
-                }
-            })
-
-            setModuleResult(data);
-
-        }
-        search();
-    },[]);
-
-    useEffect(()=>{
+    }
+    const poolLoad = ()=>{
         const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/pools/",{
                 params:{
@@ -125,8 +86,8 @@ const Navigation = (props) => {
 
         }
         search();
-    },[]);
-    useEffect(()=>{
+    }
+    const platformLoad = ()=>{
         const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/platforms/",{
                 params:{
@@ -139,8 +100,9 @@ const Navigation = (props) => {
 
         }
         search();
-    },[]);
-    useEffect(()=>{
+    }
+
+    const ParameterLoad = ()=>{
         const search = async ()=>{
             const {data} = await axios.get("http://localhost:3000/parameters/",{
                 params:{
@@ -153,7 +115,17 @@ const Navigation = (props) => {
 
         }
         search();
+    }
+    useEffect(()=>{
+        PermissionLoad();
+        roleLOad();
+        OrganizationLoad();
+        poolLoad();
+        platformLoad();
+        ParameterLoad();
     },[]);
+
+
     return (
             <>
          
@@ -166,22 +138,22 @@ const Navigation = (props) => {
                     <div className="flex-grow flex flex-col">
                     <Searchbar showSidebar={showSidebar} />
                         <div className="inner-section h-full py-9 px-8">
-                        <Route exact path="/"> <Home /> </Route>
+                            <Route exact path="/"> <Home /> </Route>
                             <Route exact path="/adduser"> <AddNewUser  permissionData= {permissionResults} orgOption={orgResults} roleOption={roleResults} /> </Route>
                             <Route path="/updateuser/:id"> <UpdateUser permissionData= {permissionResults} orgOption={orgResults} roleOption={roleResults} /> </Route>
                             <Route path="/updaterole/:id"> <UpdateRole permissionData= {permissionResults} /> </Route>
                             <Route path="/updatemodule/:id"> <UpdateModule permissionData= {permissionResults} platformOption={platform} parameterOpt={parameter} /> </Route>
-                            <Route path="/updateorg/:id"> <UpdateOrganization data={orgResults} /> </Route>
+                            <Route path="/updateorg/:id"> <UpdateOrganization  /> </Route>
                             <Route path="/addrole"> <AddNewRole permissionData= {permissionResults} /> </Route>
                             <Route path="/addmodule"> <AddNewModule permissionData= {permissionResults} platformOption={platform} parameterOpt={parameter} /> </Route>
                             <Route path="/addorganization"> <AddOrganization /> </Route>
 
 
-                            <Route path="/managemodule"> <ManageModule data={moduleResults}  /> </Route>
-                            <Route path="/manageorganization"> <ManageOrganization data={orgResults} /> </Route>
-                            <Route path="/managerole"> <ManageRole data={roleResults}  /> </Route>
-                            <Route path="/manageuser"> <ManageUser data={userResults} poolsdata={pool } permissionData= {permissionResults} /> </Route>
-                            <Route path="/pools"> <Pools poolsdata={pool} /> </Route>
+                            <Route path="/managemodule"> <ManageModule   /> </Route>
+                            <Route path="/manageorganization"> <ManageOrganization  /> </Route>
+                            <Route path="/managerole"> <ManageRole  /> </Route>
+                            <Route path="/manageuser"> <ManageUser poolsdata={pool } permissionData= {permissionResults} /> </Route>
+                            <Route path="/pools"> <Pools  /> </Route>
                         </div>
                     </div>
                </div>

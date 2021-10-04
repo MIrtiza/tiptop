@@ -19,9 +19,7 @@ const UpdateOrganization = () => {
     const [organization, setOrganization] = useState([]);
 
     const { name, registraionNumber, status, created } = organization;
-    // const onInputChange = e => {
-    //     setOrganization({ ...organization, [e.target.name]: e.target.value });
-    //   };
+  
       
     //   const [myname, setName] = useState(name);
     //   const [regNumber, setRegNumber] = useState(registraionNumber);
@@ -32,6 +30,9 @@ const UpdateOrganization = () => {
       const onInputChange = e => {
         setOrganization({ ...organization, [e.target.name]: e.target.value });
       };
+
+    //   test
+    // const onInputChange = e => setOrganization(prevState => ({ ...organization, [e.target.name]: e.target.value }));
   
       useEffect(() => {
         let today = new Date();
@@ -57,7 +58,7 @@ const UpdateOrganization = () => {
     const loadUser = async () => {
         const {data} = await axios.get(`http://localhost:3000/organization/${id}`);
         setOrganization(data);
-        console.log("updated data :"+data);
+        // console.log("updated data :"+data);
       };
      
     return (
@@ -71,33 +72,35 @@ const UpdateOrganization = () => {
             <div className="col-span-2 pr-6">
                 <form onSubmit={e=> onSubmitHandler(e)}>
                     <div className="mb-7">
-                        <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
+                        <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
                             Organization Name
                         </label>
                         <input 
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
                         id="username" 
                         type="text" 
+                        name="username"
                         value={name}
-                        onChange={e=> onInputChange(e)}
+                        onChange={ onInputChange}
                         />
                         <span> <b>previous value :</b> {name} </span>
                     </div>
                     <div className="mb-7">
-                        <label className="block text-grey-darker text-sm font-bold mb-2" for="regno">
+                        <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="regno">
                             Registration No.
                         </label>
                         <input 
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
                         id="regno" 
                         type="text" 
+                        name="regno"
                         value={registraionNumber}
                         onChange={e=> onInputChange(e)}
                         />
                         <span> <b>previous value :</b> {registraionNumber} </span>
                     </div>
                     <div className="select-section mb-7">
-                        <label className="block text-grey-darker text-sm font-bold mb-2" for="status">
+                        <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="status">
                             Status
                             </label>
                         <Select
@@ -111,7 +114,7 @@ const UpdateOrganization = () => {
                     <Link to="/manageorganization" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>
                     <button className="px-4 py-2 lg:px-9 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                     
-                    >Add New Organization
+                    >Update Organization
                     
                     </button>
                 </div>

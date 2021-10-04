@@ -16,8 +16,8 @@ const Tabs =({permissionData, Userid, onChange})=> {
   //   })
   // }
   const [permissionRest, setPermissionRest] = useState([]);
-  console.log("tabs page id :"+ CurrentuserId)
-  console.log("selected row :"+ permissionRest);
+  // console.log("tabs page id :"+ CurrentuserId)
+  // console.log("selected row :"+ permissionRest);
 
         
         useEffect(()=>{
@@ -230,12 +230,12 @@ const handlePerOpenModal =()=> {
                          </tbody>
                      </table>
 
-                     <button onClick={handlePerCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</button>
-                         <button 
-                        //  onClick={onSubmitHandler} 
+                     <button onClick={handlePerCloseModal} className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Done</button>
+                         {/* <button 
+                         onClick={onSubmitHandler} 
                          className="px-9 py-2 bg-cus-green border-2 border-indigo-500 text-white rounded-md"
                          >Submit
-                         </button>
+                         </button> */}
                      </Modal>
                  </div>
         

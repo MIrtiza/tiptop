@@ -30,11 +30,11 @@
       "permission": [
         {
           "name": "3-Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "3-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ],
       "mobile": "8881212"
@@ -51,11 +51,11 @@
       "permission": [
         {
           "name": "4-Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "4-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ],
       "mobile": "8881212"
@@ -72,73 +72,74 @@
       "permission": [
         {
           "name": "5-Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "5-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ],
       "mobile": "8881212"
     },
     {
-      "name": "mikail",
+      "id": "80d222-6d6d-44aa-a347-be65ba33562",
+      "name": "New irtiza",
       "status": true,
-      "created": "2021-10-3 15:6:38",
-      "email": "mirzaosama.wahid@petronas.com",
-      "organization": "RS (RSM)",
-      "role": " role PR (PRM)",
-      "mobile": "5342",
-      "password": "BCBBCA",
+      "created": "2021-10-4 11:38:17",
+      "email": "mirzairtiza51@gmail.com",
+      "organization": "Kuch b",
+      "role": "role RS (RSM)",
+      "mobile": "534212",
+      "password": "3421",
       "permission": [
         {
-          "name": "permission 1",
-          "type": "type 1"
+          "id": 2,
+          "name": "Uber Access",
+          "type": "AWS"
         }
-      ],
-      "id": 6
+      ]
+    },
+    {
+      "id": "5ad5d4-ba7f-4ac0-4137-fbbc0a573df",
+      "name": "New data user",
+      "status": true,
+      "created": "2021-10-4 16:10:5",
+      "email": "Mirza@ga.com",
+      "organization": "RS (RSM)",
+      "role": "role ROM",
+      "mobile": "352",
+      "password": "34232",
+      "permission": [
+        {
+          "id": 2,
+          "name": "Uber Access"
+        }
+      ]
     }
   ],
   "permission": [
     {
       "id": 1,
       "name": "Careem Access",
-      "Type": "AWS"
+      "type": "AWS"
     },
     {
       "id": 2,
       "name": "Uber Access",
-      "Type": "AWS"
+      "type": "AWS"
     },
     {
       "id": 3,
       "name": "Grab Access",
-      "Type": "AWS"
+      "type": "AWS"
     },
     {
       "id": 4,
       "name": "Bykea Access",
-      "Type": "AWS"
+      "type": "AWS"
     }
   ],
   "role": [
-    {
-      "id": 1,
-      "name": " role TM",
-      "status": false,
-      "created": "2021-12-24 12:12:00",
-      "discription": "Teritory manager",
-      "permission": [
-        {
-          "name": "1-Careem Access",
-          "Type": "AWS"
-        },
-        {
-          "name": "1-Uber Access",
-          "Type": "AWS"
-        }
-      ]
-    },
     {
       "id": 2,
       "name": " role PR (PRM)",
@@ -149,22 +150,22 @@
         {
           "id": 1,
           "name": "Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 2,
           "name": "Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 3,
           "name": "Grab Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 4,
           "name": "Bykea Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ]
     },
@@ -177,11 +178,11 @@
       "permission": [
         {
           "name": "3-Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "3-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ]
     },
@@ -194,11 +195,11 @@
       "permission": [
         {
           "name": "4-lahore Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "4-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ]
     },
@@ -211,11 +212,11 @@
       "permission": [
         {
           "name": "4-lahore Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "name": "4-Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ]
     },
@@ -228,22 +229,22 @@
         {
           "id": 1,
           "name": "Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 2,
           "name": "Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 3,
           "name": "Grab Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 4,
           "name": "Bykea Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ],
       "id": "3f8ff4-b3f5-75a-2dbc-7b7b0ce3143"
@@ -257,22 +258,22 @@
         {
           "id": 1,
           "name": "Careem Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 2,
           "name": "Uber Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 3,
           "name": "Grab Access",
-          "Type": "AWS"
+          "type": "AWS"
         },
         {
           "id": 4,
           "name": "Bykea Access",
-          "Type": "AWS"
+          "type": "AWS"
         }
       ],
       "id": "b43880c-3074-7b6-518-e1572ac78f"
@@ -319,17 +320,10 @@
   ],
   "organization": [
     {
-      "name": "New data organization",
-      "registraionNumber": "12345-xvwdc",
-      "status": true,
-      "created": "2021-10-3 1:13:10",
-      "id": 1
-    },
-    {
       "name": "Kuch b",
       "registraionNumber": "Han han miracless",
       "status": true,
-      "created": "2021-10-3 1:23:36",
+      "created": "2021-10-4 15:49:22",
       "id": 2
     },
     {
@@ -394,18 +388,16 @@
       "registraionNumber": "5342jh",
       "status": true,
       "created": "2021-10-3 13:49:11"
+    },
+    {
+      "id": "1264235-dbdb-87a6-442-5a404fa102e2",
+      "name": "new organizatio  hai",
+      "registraionNumber": "Tako bako",
+      "status": true,
+      "created": "2021-10-4 15:36:31"
     }
   ],
   "module": [
-    {
-      "id": 1,
-      "name": "TM",
-      "status": false,
-      "created": "2021-12-24 12:12:00",
-      "discription": "Administrator Access",
-      "platform": "Mobile App",
-      "parameter": "module 5"
-    },
     {
       "name": "RS (RSM) update",
       "discription": "Administrator Access",

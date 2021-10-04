@@ -80,7 +80,10 @@ const UpdateUser = ({ permissionData,orgOption, roleOption}) => {
       }
 
 
-      const eventhandler = data => {console.log("child to parent :"+  data); setPermissionRow(data)}
+    //   this is getting data from tabs child comp
+      const eventhandler = data => {console.log("child to parent :"+  data); 
+      setPermissionRow(data)
+    }
 
     useEffect(() => {
         let today = new Date();

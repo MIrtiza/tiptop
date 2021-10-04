@@ -19,6 +19,11 @@ const ManageRole = () => {
         setRole(data);
         console.log("module :"+data);
       };
+
+      const deleteUser = async id => {
+        await axios.delete(`http://localhost:3000/role/${id}`);
+        loadUser();
+      };
     return (
         <>
                 <div className="flex flex-col h-full">        
@@ -57,6 +62,11 @@ const ManageRole = () => {
                                     <Link  className="text-blue-800"
                                      to={ `/updaterole/${result.id}`} >
                                     Edit</Link> 
+
+                                    <button 
+                                    className="pl-3 text-red-300"
+                                        onClick={()=>deleteUser(result.id)}
+                                    >Delete</button>
                                 </td>
 
                                 </tr>

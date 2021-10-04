@@ -22,6 +22,10 @@ const ManageOrganization = () => {
       };
 
 
+      const deleteUser = async id => {
+        await axios.delete(`http://localhost:3000/organization/${id}`);
+        loadUser();
+      };
 
     return (
         <>
@@ -61,7 +65,14 @@ const ManageOrganization = () => {
                                         <ToggleSwitch id="toggle"   checked={ result.status } onChange={ (checked)=> setActive(checked) } />
                                     </td>
                                     <td className=" py-3 px-3 text-left" data-th="Created">{result.created}</td>
-                                    <td className=" py-3 px-3 text-left"> <Link to={`/updateorg/${result.id}`} className="text-blue-800">Edit</Link> </td>
+                                    <td className=" py-3 px-3 text-left"> 
+                                    <Link to={`/updateorg/${result.id}`} className="text-blue-800">Edit</Link> 
+                                    <button 
+                                    className="pl-3 text-red-300"
+                                        onClick={()=>deleteUser(result.id)}
+                                    >Delete</button>
+                                    
+                                    </td>
 
                                     </tr>
                                     </>

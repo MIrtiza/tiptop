@@ -53,7 +53,7 @@ const AddNewUser = ({ permissionData, orgOption, roleOption}) => {
     const [status, setStatus] = useState(false);
     const [date, setDate] = useState('');
     const [error, setError] = useState('');
-    
+    const [permissionRow, setPermissionRow] = useState([]);
 
    // for test
     const permission = [
@@ -91,13 +91,17 @@ const AddNewUser = ({ permissionData, orgOption, roleOption}) => {
         const Add = async ()=>{
             await axios.post('http://localhost:3000/user/',{
                     id:uuid(),name:name, status: status.value, created: date ,email: email, organization: selectOrg.value, role:selectRole.value, mobile: mobile,
-                    password: password, permission: permission
+                    password: password, permission: permissionRow
                 })
         }
         Add();
         history.push("/manageuser");
         alert("added")        
     }
+
+        //   this is getting data from tabs child comp
+        const eventhandler = data => {console.log("child to parent :"+  data); setPermissionRow(data)}
+
 
     return (
         <>
@@ -231,7 +235,7 @@ const AddNewUser = ({ permissionData, orgOption, roleOption}) => {
                 </div>
                 <div className="tabing-section mb-12">
                
-                    <Tabbing permissionData={permissionData}  />
+                    <Tabbing permissionData={permissionData} onChange={eventhandler}  />
                 </div>
                 <div className="button-wrapper flex flex-row ml-auto justify-end">
                     <Link to="/manageuser" className="px-4 py-2 lg:px-9 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>

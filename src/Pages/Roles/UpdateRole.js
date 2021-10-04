@@ -28,6 +28,7 @@ const UpdateRole = ({hide, permissionData}) => {
     const [mystatus, setStatus] = useState(status);
     const [date, setDate] = useState(created);
     const [error, setError] = useState('');
+    const [permissionRow, setPermissionRow] = useState([]);
 
     const onInputChange = e => {
         setRole({ ...role, [e.target.name]: e.target.value });
@@ -45,7 +46,7 @@ const UpdateRole = ({hide, permissionData}) => {
     const onSubmitHandler = (e)=>{
         e.preventDefault();
         const Add = async ()=>{
-            await axios.put(`http://localhost:3000/role/${id}`,{name: name,discription: discription, status: mystatus.value, created:date,permission: permissionData })
+            await axios.put(`http://localhost:3000/role/${id}`,{name: name,discription: discription, status: mystatus.value, created:date,permission: permissionRow })
         }
         Add();
         alert("updated");
@@ -58,7 +59,9 @@ const UpdateRole = ({hide, permissionData}) => {
         setRole(data);
         console.log("updated data :"+data);
       };
-  
+
+     //   this is getting data from tabs child comp
+     const eventhandler = data => {console.log("child to parent :"+  data); setPermissionRow(data)}
  
 
     return (
@@ -138,7 +141,7 @@ const UpdateRole = ({hide, permissionData}) => {
                     </div>
                     <div className="tabing-section mb-12">
                     
-                        <Tabbing  Userid={id} permissionData={permissionData} />
+                        <Tabbing  Userid={id} permissionData={permissionData} onChange={eventhandler} />
                     </div>
                     <div className={`button-wrapper flex flex-row ml-auto justify-end`}>
                         <Link to="/managerole" className="px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3">Cancel</Link>

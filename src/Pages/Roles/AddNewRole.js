@@ -23,15 +23,11 @@ const AddNewRole = ({hide, permissionData, path}) => {
     const [status, setStatus] = useState(false);
     const [date, setDate] = useState('');
     const [error, setError] = useState('');
+    const [permissionRow, setPermissionRow] = useState([]);
 
-    // for test
-    const permission = [
-        {
-            value:"permission 1",
-            type: "type 1"
-        }
-    ]
-   
+        //   this is getting data from tabs child comp
+        const eventhandler = data => {console.log("child to parent :"+  data); setPermissionRow(data)}
+
     useEffect(() => {
         let today = new Date();
         let time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -40,7 +36,7 @@ const AddNewRole = ({hide, permissionData, path}) => {
     const onSubmitHandler=()=>{
         // e.preventDefault();
         const Add = async ()=>{
-            await axios.post('http://localhost:3000/role/',{id:uuid(),name:name, status: status.value, created: date ,discription: disc, permission:permission})
+            await axios.post('http://localhost:3000/role/',{id:uuid(),name:name, status: status.value, created: date ,discription: disc, permission:permissionRow})
         }
         Add();
         if(path==="/adduser"){
@@ -118,7 +114,7 @@ const AddNewRole = ({hide, permissionData, path}) => {
                     </div>
                     <div className="tabing-section mb-12">
                 
-                        <Tabbing permissionData={permissionData}  />
+                        <Tabbing permissionData={permissionData} onChange={eventhandler} />
                     </div>
                     <div className={`button-wrapper flex flex-row ml-auto justify-end `}>
                         <Link to="/managerole" className={`px-9 py-2 border-2 border-indigo-500 text-blue-600 rounded-md mx-3 ${hide}`}>Cancel</Link>

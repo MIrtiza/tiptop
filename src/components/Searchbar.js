@@ -1,6 +1,7 @@
 
 import * as FaIcons from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import profile from '../assets/images/profile.png'
 const Searchbar = ({showSidebar}) => {
     return (
         <>
@@ -37,7 +38,7 @@ const Searchbar = ({showSidebar}) => {
                                 <div className="profile-icon relative ml-6 h-16 w-16">
                                 <button type="button" className="h-full w-full p-0">
                                   <img
-                                        src="https://www.gravatar.com/avatar/9240e2357dc0b9a4cfd1b109c23af063?d=https%3A%2F%2Fui-avatars.com%2Fapi%2Fmuse"
+                                        src={profile}
                                         className="block w-full border-blue-600 border-2 rounded-full  p-0  focus:outline-none"/>
                                 </button> 
                                 </div>

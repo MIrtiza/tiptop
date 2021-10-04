@@ -19,6 +19,10 @@ const ManageModule = () => {
         console.log("module :"+data);
       };
  
+      const deleteUser = async id => {
+        await axios.delete(`http://localhost:3000/module/${id}`);
+        loadUser();
+      };
     return (
         <>
                 <div className="flex flex-col h-full">
@@ -64,6 +68,11 @@ const ManageModule = () => {
                                     to={ `/updatemodule/${result.id}`}
                                      
                                     className="text-blue-800">Edit</Link> 
+
+                                    <button 
+                                    className="pl-3 text-red-300"
+                                        onClick={()=>deleteUser(result.id)}
+                                    >Delete</button>
                                     
                                     </td>
 
